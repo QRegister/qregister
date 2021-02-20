@@ -22,7 +22,6 @@ class DataUserRepository extends UserRepository {
   Future<void> initializeRepository() async {
     usersReference = _firestore.collection('users');
     final snapshot = await usersReference.doc('fyOeMsaNUO7AwxCaibx8').get();
-    print('SNAPSHOT DATA: ');
     _currentUser = UserMapper.createUserFromMap(snapshot.data());
   }
 }

@@ -27,23 +27,9 @@ class _SplashViewState extends ViewState<SplashView, SplashController> {
         width: size.width,
         height: size.height,
         child: Center(
-          child: Text(
-            'QReceipt',
-            style: TextStyle(
-              foreground: Paint()
-                ..shader = LinearGradient(
-                  colors: <Color>[
-                    kPrimaryColor1,
-                    kPrimaryColor2,
-                    kPrimaryColor3,
-                    kPrimaryColor4,
-                  ],
-                ).createShader(
-                  Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
-                ),
-              fontSize: 60,
-              fontWeight: FontWeight.w700,
-            ),
+          child: Image.asset(
+            'assets/icons/icon_1.png',
+            height: size.height / 3.5,
           ),
         ),
       ),
