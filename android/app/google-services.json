@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "750426390333",
+    "firebase_url": "https://qreceipt-da802-default-rtdb.firebaseio.com",
+    "project_id": "qreceipt-da802",
+    "storage_bucket": "qreceipt-da802.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750426390333:android:21a44758cb261f12d20f54",
+        "android_client_info": {
+          "package_name": "com.example.qreceipt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750426390333-6aq6sf8duk060a00dupearc3vmbgcpkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxZMLgYa6ClYc1p33SLNSrI3GXqaxXx9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750426390333-6aq6sf8duk060a00dupearc3vmbgcpkh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

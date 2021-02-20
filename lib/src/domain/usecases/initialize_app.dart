@@ -15,8 +15,10 @@ class InitializeApp extends UseCase<void, void> {
     StreamController<void> controller = StreamController();
     try {
       await _userRepository.initializeRepository();
-      await _receiptRepository
-          .initializeRepository(_userRepository.currentUser.uid);
+      _receiptRepository.initializeRepository(
+        _userRepository.currentUser.receipts,
+        _userRepository.currentUser.archivedReceipts,
+      );
       logger.finest('InitializeApp Successful');
       controller.close();
     } catch (error) {

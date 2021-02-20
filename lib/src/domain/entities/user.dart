@@ -1,11 +1,9 @@
-import 'package:qreceipt/src/domain/entities/receipt.dart';
-
 class User {
   String uid;
   String firstName;
   String lastName;
-  List<Receipt> receipts;
-  List<Receipt> archivedReceipts;
+  List<dynamic> receipts;
+  List<dynamic> archivedReceipts;
 
   User({
     this.uid,
@@ -14,4 +12,9 @@ class User {
     this.receipts,
     this.archivedReceipts,
   });
+
+  @override
+  String toString() {
+    return 'firstName: $firstName, lastName: $lastName, uid: $uid, receipts: ${receipts.toString()}, archivedReceipts: ${archivedReceipts.toString()}';
+  }
 }
