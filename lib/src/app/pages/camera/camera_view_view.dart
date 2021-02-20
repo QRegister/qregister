@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qreceipt/src/app/constants.dart';
 import 'package:qreceipt/src/app/pages/camera/camera_view_controller.dart';
+import 'package:qreceipt/src/app/widgets/app_bar_painter.dart';
 import 'package:qreceipt/src/data/repositories/data_receipt_repository.dart';
 import 'package:qreceipt/src/data/repositories/data_user_repository.dart';
 
@@ -45,6 +46,13 @@ class _CameraViewViewState
                         cutOutSize: 255,
                       ),
                       overlayMargin: EdgeInsets.only(top: 50),
+                    ),
+                    CustomPaint(
+                      size: Size(size.width, size.height + 200),
+                      foregroundPainter: AppBarPainter(
+                        color: kPrimaryColor1,
+                        curveRadius: size.width * 0.75,
+                      ),
                     ),
                     Positioned(
                       left: 0,

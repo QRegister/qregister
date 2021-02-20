@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:qreceipt/src/app/constants.dart';
 import 'package:qreceipt/src/app/pages/camera/camera_view_view.dart';
 import 'package:qreceipt/src/app/pages/home/home_controller.dart';
-import 'package:qreceipt/src/app/widgets/app_bar_painter.dart';
+import 'package:qreceipt/src/app/pages/profile/profile_view.dart';
 
 class HomeView extends View {
   @override
@@ -14,13 +14,19 @@ class HomeView extends View {
 }
 
 class _HomeViewState extends ViewState<HomeView, HomeController>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   _HomeViewState(HomeController controller) : super(controller);
+  TabController tabController;
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget get view {
-    TabController tabController =
-        TabController(length: 3, vsync: this, initialIndex: 1);
+    tabController = TabController(length: 3, vsync: this, initialIndex: 1);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -40,6 +46,7 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
             backgroundColor: kPrimaryColor5,
             color: kPrimaryColor4.withOpacity(0.6),
             activeColor: kPrimaryColor1,
+            top: -20,
             items: [
               TabItem(icon: Icons.info_outline, title: 'Info'),
               TabItem(icon: Icons.home_outlined, title: 'Home'),
@@ -57,15 +64,8 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
                 children: [
                   Container(),
                   CameraViewView(),
-                  Container(),
+                  ProfileView(),
                 ],
-              ),
-            ),
-            CustomPaint(
-              size: Size(size.width, size.height + 200),
-              foregroundPainter: AppBarPainter(
-                color: kPrimaryColor1,
-                curveRadius: size.width * 0.75,
               ),
             ),
             Positioned(
