@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qreceipt/src/data/mappers/receipt_mapper.dart';
+import 'package:qreceipt/src/domain/entities/product.dart';
 import 'package:qreceipt/src/domain/entities/receipt.dart';
 import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
 
@@ -16,15 +17,39 @@ class DataReceiptRepository extends ReceiptRepository {
   List<Receipt> _archivedReceipts = [];
 
   @override
-  Future<String> addReceiptToUser(Receipt receipt, String uid) {
-    // TODO: implement addReceiptToUser
-    throw UnimplementedError();
+  Future<String> addReceiptToUser(Receipt receipt, String uid) async {
+    // Firestore update
+    await _firestore.collection('users').doc(uid).update({
+      'receipts': FieldValue.arrayUnion([receipt.toMap()]),
+    });
+
+    // Local repository update
+    _receipts.add(receipt);
+
+    return receipt.id;
   }
 
   @override
-  Future<String> archiveReceiptOfUser(String receiptId, String uid) {
-    // TODO: implement archiveReceiptOfUser
-    throw UnimplementedError();
+  Future<String> archiveReceiptOfUser(String receiptId, String uid) async {
+    int index = this._receipts.indexWhere((element) => element.id == receiptId);
+
+    // Firestore update
+    await _firestore.collection('users').doc(uid).update({
+      'receipts':
+          FieldValue.arrayRemove([this._receipts.elementAt(index).toMap()]),
+    });
+
+    await _firestore.collection('users').doc(uid).update({
+      'archivedReceipts':
+          FieldValue.arrayUnion([this._receipts.elementAt(index).toMap()]),
+    });
+
+    // Local repository update
+
+    this._archivedReceipts.add(this._receipts.elementAt(index));
+    this._archivedReceipts.removeAt(index);
+
+    return receiptId;
   }
 
   @override
@@ -45,7 +70,7 @@ class DataReceiptRepository extends ReceiptRepository {
         this._receipts.add(ReceiptMapper.createReceiptFromMap(element));
       });
     }
-    if (receiptsOfUser != null && archivedReceiptsOfUser.isNotEmpty) {
+    if (archivedReceiptsOfUser != null && archivedReceiptsOfUser.isNotEmpty) {
       archivedReceiptsOfUser.forEach((element) {
         this._archivedReceipts.add(ReceiptMapper.createReceiptFromMap(element));
       });

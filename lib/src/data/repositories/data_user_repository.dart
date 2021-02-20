@@ -23,5 +23,6 @@ class DataUserRepository extends UserRepository {
     usersReference = _firestore.collection('users');
     final snapshot = await usersReference.doc('fyOeMsaNUO7AwxCaibx8').get();
     _currentUser = UserMapper.createUserFromMap(snapshot.data());
+    _currentUser.uid = 'fyOeMsaNUO7AwxCaibx8';
   }
 }
