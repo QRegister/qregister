@@ -7,7 +7,5 @@ class HomeController extends Controller {
   HomeController() : _presenter = HomePresenter();
 
   @override
-  void initListeners() {
-    // TODO: implement initListeners
-  }
+  void initListeners() {}
 }

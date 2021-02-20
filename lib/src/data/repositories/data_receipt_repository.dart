@@ -27,8 +27,7 @@ class DataReceiptRepository extends ReceiptRepository {
   }
 
   @override
-  Future<void> initializeRepository(String uid) {
-    // TODO: implement initializeRepository
-    throw UnimplementedError();
+  Future<void> initializeRepository(String uid) async {
+    print('Receipt repo initialized');
   }
 }

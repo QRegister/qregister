@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:qreceipt/src/app/pages/home/home_view.dart';
 import 'package:qreceipt/src/app/pages/splash/splash_presenter.dart';
 import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
 import 'package:qreceipt/src/domain/repositories/user_repository.dart';
@@ -15,9 +17,19 @@ class SplashController extends Controller {
 
   @override
   void initListeners() {
-    _presenter.initializeAppOnComplete = () {};
+    _presenter.initializeAppOnComplete = () async {
+      await Future.delayed(Duration(seconds: 2));
+      Navigator.of(getContext()).pushAndRemoveUntil(
+          PageTransition(
+            type: PageTransitionType.fade,
+            child: HomeView(),
+          ),
+          (route) => false);
+    };
 
-    _presenter.initializeAppOnError = () {};
+    _presenter.initializeAppOnError = (e) {
+      print(e);
+    };
   }
 
   @override
