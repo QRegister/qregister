@@ -28,8 +28,8 @@ class _SplashViewState extends ViewState<SplashView, SplashController> {
         height: size.height,
         child: Center(
           child: Image.asset(
-            'assets/icons/icon_1.png',
-            height: size.height / 3.5,
+            'assets/icons/icon_2.png',
+            height: size.height / 3,
           ),
         ),
       ),
