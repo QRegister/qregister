@@ -1,6 +1,6 @@
 # qregister
 
-A new Flutter project.
+<img src="https://github.com/QRegister/qregister-desktop/blob/main/qregister_logo.png" width="256">
 
 ## Getting Started
 
