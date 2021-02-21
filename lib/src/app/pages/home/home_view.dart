@@ -4,6 +4,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:qregister/src/app/constants.dart';
 import 'package:qregister/src/app/pages/camera/camera_view_view.dart';
 import 'package:qregister/src/app/pages/home/home_controller.dart';
+import 'package:qregister/src/app/pages/info/info_view.dart';
 import 'package:qregister/src/app/pages/profile/profile_view.dart';
 
 class HomeView extends View {
@@ -62,7 +63,7 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
                 controller: controller.pageController,
                 onPageChanged: (value) => tabController.animateTo(value),
                 children: [
-                  Container(),
+                  InfoView(),
                   CameraViewView(context),
                   ProfileView(),
                 ],
