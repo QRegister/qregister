@@ -11,7 +11,11 @@
 - You can access the Information page by swiping right on the Home page or tapping on the “Info” icon on the left of the bottom bar.
 
 ## Run
-- 
+
+- Download required packages
+```flutter pub get```
+- Run QRegister app
+```flutter run```
 
 
 ## Frequently Asked Questions (FAQ)
