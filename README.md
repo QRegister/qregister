@@ -1,3 +1,5 @@
+<img alt="Flutter" src="https://img.shields.io/badge/Flutter%20-%2302569B.svg?&style=for-the-badge&logo=Flutter&logoColor=white" />
+
 # QRegister
 
 <img src="https://github.com/QRegister/qregister-desktop/blob/main/qregister_logo.png" width="256">
