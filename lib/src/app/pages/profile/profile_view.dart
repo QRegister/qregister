@@ -5,6 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:qregister/src/app/constants.dart';
 import 'package:qregister/src/app/pages/archive/archive_view.dart';
 import 'package:qregister/src/app/pages/profile/profile_controller.dart';
+import 'package:qregister/src/app/pages/receipt_details/receipt_details_view.dart';
 import 'package:qregister/src/app/widgets/progress_indicators.dart';
 import 'package:qregister/src/data/repositories/data_receipt_repository.dart';
 import 'package:qregister/src/data/repositories/data_user_repository.dart';
@@ -184,81 +185,96 @@ Widget receiptCard(
     isStoreExist = false;
   }
 
-  return Column(
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35),
-        child: Dismissible(
-          key: Key(receipt.date.toString()),
-          background: Container(),
-          secondaryBackground: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Icon(
-                Icons.archive_outlined,
-                color: kPrimaryColor3,
-                size: 30,
-              ),
-              SizedBox(
-                width: 15,
-              )
-            ],
-          ),
-          onDismissed: (direction) async {
-            if (direction == DismissDirection.endToStart) {
-              await archiveReceiptOfUser(receipt.id);
-              Scaffold.of(context).showSnackBar(
-                  SnackBar(content: Text("Receipt has been archived\n")));
-            }
-          },
-          child: Container(
-            width: size.width - 20,
-            height: 75,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: receiptCardShadowList(),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Row(
+  return FlatButton(
+    splashColor: Colors.transparent,
+    focusColor: Colors.transparent,
+    hoverColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    onPressed: () => Navigator.of(context).push(PageTransition(
+        child: ReceiptDetailsView(
+          receipt: receipt,
+        ),
+        type: PageTransitionType.rightToLeft)),
+    padding: EdgeInsets.all(0),
+    child: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 35),
+          child: Dismissible(
+            key: Key(receipt.date.toString()),
+            background: Container(),
+            secondaryBackground: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Image.asset(
-                    imagePath,
-                    width: isStoreExist ? 60 : 60,
-                    height: isStoreExist ? 60 : 150,
-                  ),
+                Icon(
+                  Icons.archive_outlined,
+                  color: kPrimaryColor3,
+                  size: 30,
                 ),
-                Container(
-                  width: size.width * 0.52,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${receipt.storeLocation}',
-                        style: GoogleFonts.openSans(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        '${receipt.totalPrice.toString()}',
-                        style: GoogleFonts.openSans(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                SizedBox(
+                  width: 15,
+                )
               ],
+            ),
+            confirmDismiss: (direction) async {
+              if (direction == DismissDirection.endToStart) {
+                await archiveReceiptOfUser(receipt.id);
+                Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text("Receipt has been archived\n")));
+                return true;
+              } else {
+                return false;
+              }
+            },
+            child: Container(
+              width: size.width - 20,
+              height: 75,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: receiptCardShadowList(),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Image.asset(
+                      imagePath,
+                      width: isStoreExist ? 60 : 60,
+                      height: isStoreExist ? 60 : 150,
+                    ),
+                  ),
+                  Container(
+                    width: size.width * 0.52,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${receipt.storeLocation}',
+                          style: GoogleFonts.openSans(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          '${receipt.totalPrice.toString()}',
+                          style: GoogleFonts.openSans(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      SizedBox(
-        height: 30,
-      ),
-    ],
+        SizedBox(
+          height: 30,
+        ),
+      ],
+    ),
   );
 }
 
