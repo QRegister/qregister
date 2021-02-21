@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
-import 'package:qreceipt/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/domain/repositories/user_repository.dart';
 
 class ArchiveReceiptOfUser extends UseCase<String, ArchiveReceiptOfUserParams> {
   final ReceiptRepository _receiptRepository;

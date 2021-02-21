@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750426390333:android:21a44758cb261f12d20f54",
+        "mobilesdk_app_id": "1:750426390333:android:8cd8a53af3ded833d20f54",
         "android_client_info": {
-          "package_name": "com.example.qreceipt"
+          "package_name": "com.example.qregister"
         }
       },
       "oauth_client": [

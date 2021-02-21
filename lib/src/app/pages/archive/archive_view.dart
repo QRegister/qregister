@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:qreceipt/src/app/constants.dart';
-import 'package:qreceipt/src/app/pages/archive/archive_controller.dart';
-import 'package:qreceipt/src/app/pages/receipt_details/receipt_details_view.dart';
-import 'package:qreceipt/src/app/widgets/progress_indicators.dart';
-import 'package:qreceipt/src/data/repositories/data_receipt_repository.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
+import 'package:qregister/src/app/constants.dart';
+import 'package:qregister/src/app/pages/archive/archive_controller.dart';
+import 'package:qregister/src/app/pages/receipt_details/receipt_details_view.dart';
+import 'package:qregister/src/app/widgets/progress_indicators.dart';
+import 'package:qregister/src/data/repositories/data_receipt_repository.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
 
 class ArchiveView extends View {
   @override

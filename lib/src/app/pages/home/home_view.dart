@@ -1,10 +1,10 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:qreceipt/src/app/constants.dart';
-import 'package:qreceipt/src/app/pages/camera/camera_view_view.dart';
-import 'package:qreceipt/src/app/pages/home/home_controller.dart';
-import 'package:qreceipt/src/app/pages/profile/profile_view.dart';
+import 'package:qregister/src/app/constants.dart';
+import 'package:qregister/src/app/pages/camera/camera_view_view.dart';
+import 'package:qregister/src/app/pages/home/home_controller.dart';
+import 'package:qregister/src/app/pages/profile/profile_view.dart';
 
 class HomeView extends View {
   @override

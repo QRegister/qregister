@@ -1,4 +1,4 @@
-package com.example.qreceipt
+package com.example.qregister
 
 import io.flutter.embedding.android.FlutterActivity
 

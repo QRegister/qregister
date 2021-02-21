@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'app/pages/splash/splash_view.dart';
 
-class QReceipt extends StatelessWidget {
+class QRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([

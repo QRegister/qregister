@@ -1,4 +1,4 @@
-import 'package:qreceipt/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
 
 abstract class ReceiptRepository {
   void initializeRepository(

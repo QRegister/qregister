@@ -1,5 +1,5 @@
-import 'package:qreceipt/src/domain/entities/product.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/entities/product.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
 
 class ReceiptMapper {
   static createReceiptFromMap(Map<String, dynamic> map) {

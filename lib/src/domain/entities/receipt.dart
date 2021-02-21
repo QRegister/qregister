@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:qreceipt/src/domain/entities/product.dart';
+import 'package:qregister/src/domain/entities/product.dart';
 
 class Receipt {
   String id;

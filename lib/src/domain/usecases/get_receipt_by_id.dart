@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 
 class GetReceiptById extends UseCase<Receipt, GetReceiptByIdParams> {
   final ReceiptRepository _receiptRepository;

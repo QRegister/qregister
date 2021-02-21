@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:qreceipt/src/app/pages/home/home_view.dart';
-import 'package:qreceipt/src/app/pages/splash/splash_presenter.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
-import 'package:qreceipt/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/app/pages/home/home_view.dart';
+import 'package:qregister/src/app/pages/splash/splash_presenter.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/domain/repositories/user_repository.dart';
 
 class SplashController extends Controller {
   final SplashPresenter _presenter;

@@ -1,9 +1,9 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
-import 'package:qreceipt/src/domain/repositories/user_repository.dart';
-import 'package:qreceipt/src/domain/usecases/add_receipt_to_user.dart';
-import 'package:qreceipt/src/domain/usecases/get_receipt_by_id.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/domain/usecases/add_receipt_to_user.dart';
+import 'package:qregister/src/domain/usecases/get_receipt_by_id.dart';
 
 class CameraPresenter extends Presenter {
   Function addReceiptToUserOnNext;

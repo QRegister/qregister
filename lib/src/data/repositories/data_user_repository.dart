@@ -1,6 +1,6 @@
-import 'package:qreceipt/src/data/mappers/user_mapper.dart';
-import 'package:qreceipt/src/domain/entities/user.dart';
-import 'package:qreceipt/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/data/mappers/user_mapper.dart';
+import 'package:qregister/src/domain/entities/user.dart';
+import 'package:qregister/src/domain/repositories/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataUserRepository extends UserRepository {

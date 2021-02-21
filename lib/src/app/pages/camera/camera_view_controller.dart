@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qreceipt/src/app/pages/camera/camera_view_presenter.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
-import 'package:qreceipt/src/domain/repositories/user_repository.dart';
-import 'package:qreceipt/src/app/constants.dart';
+import 'package:qregister/src/app/pages/camera/camera_view_presenter.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/app/constants.dart';
 
 class CameraViewController extends Controller {
   final CameraPresenter _presenter;

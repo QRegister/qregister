@@ -1,4 +1,4 @@
-import 'package:qreceipt/src/domain/entities/user.dart';
+import 'package:qregister/src/domain/entities/user.dart';
 
 class UserMapper {
   static createUserFromMap(Map<String, dynamic> map) {

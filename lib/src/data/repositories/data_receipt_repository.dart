@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:qreceipt/src/data/mappers/receipt_mapper.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/data/mappers/receipt_mapper.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 
 class DataReceiptRepository extends ReceiptRepository {
   static final _instance = DataReceiptRepository._internal();

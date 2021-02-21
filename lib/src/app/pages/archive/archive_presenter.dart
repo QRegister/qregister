@@ -1,7 +1,7 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
-import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
-import 'package:qreceipt/src/domain/usecases/get_archived_receipts_of_user.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/repositories/receipt_repository.dart';
+import 'package:qregister/src/domain/usecases/get_archived_receipts_of_user.dart';
 
 class ArchivePresenter extends Presenter {
   Function getArchivedReceiptsOfUserOnNext;

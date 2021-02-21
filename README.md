@@ -1,4 +1,4 @@
-# qreceipt
+# qregister
 
 A new Flutter project.
 

@@ -1,8 +1,8 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qreceipt/src/domain/entities/product.dart';
-import 'package:qreceipt/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/entities/product.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
 
 import '../../constants.dart';
 
