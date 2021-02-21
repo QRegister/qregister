@@ -5,11 +5,10 @@
 <img src="https://github.com/QRegister/qregister-desktop/blob/main/qregister_logo.png" width="256">
 
 ## Specs
-- Inventor reading from text files
-- Receipt generation according to inventory
-- QR Code generation which includes all receipt data in encrypted form
-- Accessing Firebase Firestore to record the receipt data for future usage
-- Supported many operating systems including Windows, OS X, Linux, Raspbian...
+- You can access this page by swiping left on the Home page, or you can navigate using the bottom bar by tapping on the “Profile” icon on the far right.
+- Your profile contains all the past receipts and their details. The receipts are listed by their dates and labeled with supermarket icons for glancing through quickly.
+- The archive button on the upper left corner archives important receipts for easy access in the future.
+- You can access the Information page by swiping right on the Home page or tapping on the “Info” icon on the left of the bottom bar.
 
 ## Run
 - 
