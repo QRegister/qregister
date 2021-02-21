@@ -63,7 +63,7 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
                 onPageChanged: (value) => tabController.animateTo(value),
                 children: [
                   Container(),
-                  CameraViewView(),
+                  CameraViewView(context),
                   ProfileView(),
                 ],
               ),

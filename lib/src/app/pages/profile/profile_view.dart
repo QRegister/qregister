@@ -205,12 +205,11 @@ Widget receiptCard(
             ],
           ),
           onDismissed: (direction) async {
-            if (direction == DismissDirection.endToStart)
+            if (direction == DismissDirection.endToStart) {
               await archiveReceiptOfUser(receipt.id);
-            else
-              print('none');
-            Scaffold.of(context).showSnackBar(
-                SnackBar(content: Text("Receipt has been archived")));
+              Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text("Receipt has been archived\n")));
+            }
           },
           child: Container(
             width: size.width - 20,

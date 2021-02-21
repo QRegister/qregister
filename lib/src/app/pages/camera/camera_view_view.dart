@@ -10,11 +10,15 @@ import 'package:qreceipt/src/data/repositories/data_receipt_repository.dart';
 import 'package:qreceipt/src/data/repositories/data_user_repository.dart';
 
 class CameraViewView extends View {
+  final BuildContext homeContext;
+
+  CameraViewView(this.homeContext);
   @override
   State<StatefulWidget> createState() => _CameraViewViewState(
         CameraViewController(
           DataUserRepository(),
           DataReceiptRepository(),
+          homeContext,
         ),
       );
 }
@@ -27,57 +31,56 @@ class _CameraViewViewState
   Widget get view {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 5,
-              child: ControlledWidgetBuilder<CameraViewController>(
-                builder: (context, controller) => Stack(
-                  children: [
-                    QRView(
-                      key: controller.qrKey,
-                      onQRViewCreated: controller.onQRViewCreated,
-                      overlay: QrScannerOverlayShape(
-                        borderColor: kPrimaryColor2,
-                        borderRadius: 10,
-                        borderLength: 30,
-                        borderWidth: 15,
-                        cutOutSize: 255,
-                      ),
-                      overlayMargin: EdgeInsets.only(top: 50),
+      key: globalKey,
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: ControlledWidgetBuilder<CameraViewController>(
+              builder: (context, controller) => Stack(
+                children: [
+                  QRView(
+                    key: controller.qrKey,
+                    onQRViewCreated: controller.onQRViewCreated,
+                    overlay: QrScannerOverlayShape(
+                      borderColor: kPrimaryColor2,
+                      borderRadius: 10,
+                      borderLength: 30,
+                      borderWidth: 15,
+                      cutOutSize: 255,
                     ),
-                    CustomPaint(
-                      size: Size(size.width, size.height + 200),
-                      foregroundPainter: AppBarPainter(
-                        color: kPrimaryColor1,
-                        curveRadius: size.width * 0.75,
-                      ),
+                    overlayMargin: EdgeInsets.only(top: 50),
+                  ),
+                  CustomPaint(
+                    size: Size(size.width, size.height + 200),
+                    foregroundPainter: AppBarPainter(
+                      color: kPrimaryColor1,
+                      curveRadius: size.width * 0.75,
                     ),
-                    Positioned(
-                      left: 0,
-                      bottom: size.height * 0.125,
-                      child: Container(
-                        width: size.width,
-                        child: Center(
-                          child: Text(
-                            'Scan QR',
-                            style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                              ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    bottom: size.height * 0.125,
+                    child: Container(
+                      width: size.width,
+                      child: Center(
+                        child: Text(
+                          'Scan QR',
+                          style: GoogleFonts.openSans(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
                             ),
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

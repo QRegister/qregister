@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qreceipt/src/app/pages/camera/camera_view_presenter.dart';
+import 'package:qreceipt/src/domain/entities/receipt.dart';
 import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
 import 'package:qreceipt/src/domain/repositories/user_repository.dart';
+import 'package:qreceipt/src/app/constants.dart';
 
 class CameraViewController extends Controller {
   final CameraPresenter _presenter;
+  final BuildContext homeContext;
 
   CameraViewController(
     UserRepository userRepository,
     ReceiptRepository receiptRepository,
+    this.homeContext,
   ) : _presenter = CameraPresenter(userRepository, receiptRepository);
 
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -19,9 +24,126 @@ class CameraViewController extends Controller {
 
   @override
   void initListeners() {
-    _presenter.addReceiptToUserOnNext = (String response) {};
+    _presenter.addReceiptToUserOnNext = (String response) {
+      Scaffold.of(getContext()).showSnackBar(
+        SnackBar(
+          content: Text("Receipt has been added to your receipt list\n"),
+        ),
+      );
+      scanResult = null;
+    };
 
-    _presenter.addReceiptToUserOnError = (e) {};
+    _presenter.addReceiptToUserOnError = (e) {
+      print(e);
+    };
+
+    _presenter.getReceiptByIdOnNext = (Receipt response) async {
+      await showDialog(
+        context: homeContext,
+        barrierDismissible: false,
+        builder: (ctx) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: Text(
+              'Is This Your Receipt?',
+              style: GoogleFonts.openSans(
+                textStyle: TextStyle(
+                  color: kPrimaryColor4,
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            content: Text(
+              'Store: ' +
+                  response.storeLocation +
+                  '\nTotal Cost: ' +
+                  response.totalPrice.toString(),
+              style: GoogleFonts.openSans(
+                textStyle: TextStyle(
+                  fontSize: 21,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(homeContext).pop();
+                  scanResult = null;
+                },
+                child: Text(
+                  'Nope',
+                  style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                      color: kPrimaryColor4.withOpacity(0.5),
+                      fontSize: 21,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              FlatButton(
+                color: kPrimaryColor1,
+                onPressed: () {
+                  this.addReceiptToUser(response);
+                  Navigator.of(homeContext).pop();
+                },
+                child: Text(
+                  'YES!',
+                  style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 21,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    };
+
+    _presenter.getReceiptByIdOnError = (e) async {
+      showDialog(
+        context: homeContext,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Something Went Wrong',
+              style: GoogleFonts.openSans(
+                textStyle: TextStyle(
+                  color: kPrimaryColor4,
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            content: Text(
+              'Please scan again',
+              style: GoogleFonts.openSans(
+                textStyle: TextStyle(
+                  fontSize: 21,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            actions: [
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
+    };
   }
 
   @override
@@ -33,11 +155,20 @@ class CameraViewController extends Controller {
   void onQRViewCreated(QRViewController response) {
     this.qrViewController = response;
     this.qrViewController.scannedDataStream.listen((scanData) {
-      scanResult = scanData;
+      if (scanResult == null) {
+        scanResult = scanData;
+        this.getReceiptById(scanResult.code);
+      }
       refreshUI();
-      print('-------- QR DATA --------');
-      print(scanResult.code);
     });
+  }
+
+  void getReceiptById(String receiptId) {
+    _presenter.getReceiptById(receiptId);
+  }
+
+  void addReceiptToUser(Receipt receipt) {
+    _presenter.addReceiptToUser(receipt);
   }
 
   void refreshScreen() {

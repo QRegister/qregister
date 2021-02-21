@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qreceipt/src/data/mappers/receipt_mapper.dart';
-import 'package:qreceipt/src/domain/entities/product.dart';
 import 'package:qreceipt/src/domain/entities/receipt.dart';
 import 'package:qreceipt/src/domain/repositories/receipt_repository.dart';
 
@@ -50,6 +49,16 @@ class DataReceiptRepository extends ReceiptRepository {
     this._archivedReceipts.removeAt(index);
 
     return receiptId;
+  }
+
+  @override
+  Future<Receipt> getReceiptById(String receiptId) async {
+    final snapshot =
+        await _firestore.collection('receipts').doc(receiptId).get();
+
+    Receipt receipt = ReceiptMapper.createReceiptFromMap(snapshot.data());
+    receipt.id = receiptId;
+    return receipt;
   }
 
   @override

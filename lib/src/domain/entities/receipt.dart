@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qreceipt/src/domain/entities/product.dart';
 
 class Receipt {
-  final String id;
+  String id;
   final String cashierName;
   final DateTime date;
   final List<Product> products;
