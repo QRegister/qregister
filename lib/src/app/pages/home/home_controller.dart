@@ -14,13 +14,13 @@ class HomeController extends Controller {
   @override
   void onInitState() {
     pageController = PageController(initialPage: 1);
-
     super.onInitState();
   }
 
   @override
   void onDisposed() {
     pageController.dispose();
+    _presenter.dispose();
     super.onDisposed();
   }
 

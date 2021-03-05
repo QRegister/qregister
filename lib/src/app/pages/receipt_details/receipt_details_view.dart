@@ -22,20 +22,6 @@ class ReceiptDetailsView extends StatelessWidget {
             height: size.height,
             fit: BoxFit.fill,
           ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(25, 44, 0, 0),
-              child: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: kPrimaryColor4,
-                  size: 30,
-                ),
-              ),
-            ),
-          ),
           Container(
             width: size.width,
             height: size.height,
@@ -45,9 +31,9 @@ class ReceiptDetailsView extends StatelessWidget {
                   height: size.height * 0.025,
                 ),
                 Container(
-                  width: size.width,
+                  width: size.width * 0.6,
                   height: size.height * 0.15,
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -58,6 +44,7 @@ class ReceiptDetailsView extends StatelessWidget {
                           fontSize: 25,
                           fontWeight: FontWeight.w600,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
@@ -205,6 +192,20 @@ class ReceiptDetailsView extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(25, 44, 0, 0),
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: kPrimaryColor4,
+                  size: 30,
+                ),
+              ),
             ),
           ),
         ],

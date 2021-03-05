@@ -10,6 +10,7 @@ import 'package:qregister/src/app/widgets/progress_indicators.dart';
 import 'package:qregister/src/data/repositories/data_receipt_repository.dart';
 import 'package:qregister/src/data/repositories/data_user_repository.dart';
 import 'package:qregister/src/domain/entities/receipt.dart';
+import '../../widgets/error_alert_dialog.dart';
 
 class ProfileView extends View {
   @override
@@ -41,7 +42,10 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                   width: size.width,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kPrimaryColor1, kPrimaryColor3],
+                      colors: [
+                        Color(0xff96D68B),
+                        kPrimaryColor3,
+                      ],
                     ),
                   ),
                 ),
@@ -92,7 +96,10 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                       width: size.width,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [kPrimaryColor1, kPrimaryColor3],
+                          colors: [
+                            Color(0xff96D68B),
+                            kPrimaryColor3,
+                          ],
                         ),
                         borderRadius: BorderRadius.vertical(
                           bottom: Radius.elliptical(
@@ -148,7 +155,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                                   Padding(
                                     padding: EdgeInsets.only(top: 20),
                                     child: Text(
-                                      'You have no receipts yet\n Scan a QR code to add one',
+                                      'You have no recent receipts\n Scan a QR code to add one',
                                       style: GoogleFonts.openSans(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 16,
@@ -249,11 +256,15 @@ Widget receiptCard(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          '${receipt.storeLocation}',
-                          style: GoogleFonts.openSans(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
+                        Container(
+                          width: size.width * 0.4,
+                          child: Text(
+                            '${receipt.storeLocation}',
+                            style: GoogleFonts.openSans(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         Text(

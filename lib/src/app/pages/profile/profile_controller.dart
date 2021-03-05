@@ -5,6 +5,7 @@ import 'package:qregister/src/domain/entities/receipt.dart';
 import 'package:qregister/src/domain/entities/user.dart';
 import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 import 'package:qregister/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/app/widgets/error_alert_dialog.dart';
 
 class ProfileController extends Controller {
   final ProfilePresenter _presenter;
@@ -17,6 +18,12 @@ class ProfileController extends Controller {
   bool isLoading = true;
 
   List<Receipt> receiptsOfUser;
+
+  @override
+  void onDisposed() {
+    _presenter.dispose();
+    super.onDisposed();
+  }
 
   @override
   void onInitState() {
@@ -34,7 +41,13 @@ class ProfileController extends Controller {
   void initListeners() {
     _presenter.getCurrentUserOnNext = (User user) {};
 
-    _presenter.getCurrentUserOnError = (e) {};
+    _presenter.getCurrentUserOnError = (e) {
+      print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
+    };
 
     _presenter.getReceiptsOfUserOnNext = (List<Receipt> response) async {
       receiptsOfUser = response;
@@ -45,13 +58,23 @@ class ProfileController extends Controller {
 
     _presenter.getReceiptsOfUserOnError = (e) {
       print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
     };
 
     _presenter.archiveReceiptOfUserOnNext = (String response) {
       this.receiptsOfUser.removeWhere((element) => element.id == response);
     };
 
-    _presenter.archiveReceiptOfUserOnError = (e) {};
+    _presenter.archiveReceiptOfUserOnError = (e) {
+      print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
+    };
   }
 
   void archiveReceiptOfUser(String id) {

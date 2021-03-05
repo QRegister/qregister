@@ -18,16 +18,12 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
     with TickerProviderStateMixin {
   _HomeViewState(HomeController controller) : super(controller);
   TabController tabController;
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
+  int initIndex = 1;
 
   @override
   Widget get view {
-    tabController = TabController(length: 3, vsync: this, initialIndex: 1);
+    tabController =
+        TabController(length: 3, vsync: this, initialIndex: initIndex);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -35,9 +31,10 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
         bottomNavigationBar: ControlledWidgetBuilder<HomeController>(
           builder: (context, controller) => ConvexAppBar(
             style: TabStyle.reactCircle,
-            initialActiveIndex: 1,
+            initialActiveIndex: initIndex,
             disableDefaultTabController: true,
             onTap: (int i) {
+              initIndex = i;
               controller.pageController.animateToPage(
                 i,
                 duration: Duration(milliseconds: 500),
@@ -61,7 +58,10 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
             ControlledWidgetBuilder<HomeController>(
               builder: (context, controller) => PageView(
                 controller: controller.pageController,
-                onPageChanged: (value) => tabController.animateTo(value),
+                onPageChanged: (value) {
+                  initIndex = value;
+                  tabController.animateTo(value);
+                },
                 children: [
                   InfoView(),
                   CameraViewView(context),
@@ -70,7 +70,7 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
               ),
             ),
             Positioned(
-              top: -65,
+              top: -60,
               left: size.width / 4,
               child: Image.asset(
                 'assets/icons/app_bar_icon.png',

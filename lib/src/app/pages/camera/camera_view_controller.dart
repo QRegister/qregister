@@ -7,6 +7,7 @@ import 'package:qregister/src/domain/entities/receipt.dart';
 import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 import 'package:qregister/src/domain/repositories/user_repository.dart';
 import 'package:qregister/src/app/constants.dart';
+import 'package:qregister/src/app/widgets/error_alert_dialog.dart';
 
 class CameraViewController extends Controller {
   final CameraPresenter _presenter;
@@ -35,6 +36,10 @@ class CameraViewController extends Controller {
 
     _presenter.addReceiptToUserOnError = (e) {
       print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
     };
 
     _presenter.getReceiptByIdOnNext = (Receipt response) async {
@@ -110,44 +115,18 @@ class CameraViewController extends Controller {
     _presenter.getReceiptByIdOnError = (e) async {
       showDialog(
         context: homeContext,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              'Something Went Wrong',
-              style: GoogleFonts.openSans(
-                textStyle: TextStyle(
-                  color: kPrimaryColor4,
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            content: Text(
-              'Please scan again',
-              style: GoogleFonts.openSans(
-                textStyle: TextStyle(
-                  fontSize: 21,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            actions: [
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        },
+        builder: (context) => errorAlertDialog(
+          context,
+          text1: 'Error',
+          text2: 'Please scan again',
+        ),
       );
     };
   }
 
   @override
   void onDisposed() {
+    _presenter.dispose();
     qrViewController?.dispose();
     super.onDisposed();
   }

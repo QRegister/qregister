@@ -5,6 +5,7 @@ import 'package:qregister/src/app/pages/home/home_view.dart';
 import 'package:qregister/src/app/pages/splash/splash_presenter.dart';
 import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 import 'package:qregister/src/domain/repositories/user_repository.dart';
+import 'package:qregister/src/app/widgets/error_alert_dialog.dart';
 
 class SplashController extends Controller {
   final SplashPresenter _presenter;
@@ -29,7 +30,17 @@ class SplashController extends Controller {
 
     _presenter.initializeAppOnError = (e) {
       print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
     };
+  }
+
+  @override
+  void onDisposed() {
+    _presenter.dispose();
+    super.onDisposed();
   }
 
   @override

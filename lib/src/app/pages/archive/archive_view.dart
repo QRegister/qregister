@@ -155,11 +155,14 @@ Widget archivedReceiptCard(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${receipt.storeLocation}',
-                        style: GoogleFonts.openSans(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
+                      Container(
+                        width: size.width * 0.4,
+                        child: Text(
+                          '${receipt.storeLocation}',
+                          style: GoogleFonts.openSans(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                       Text(
