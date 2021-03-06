@@ -24,16 +24,27 @@ class _SplashViewState extends ViewState<SplashView, SplashController> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: globalKey,
-      body: Container(
-        width: size.width,
-        height: size.height,
-        child: Center(
+      body: Stack(children: [
+        Container(
+          height: size.height,
+          width: size.width,
           child: Image.asset(
-            'assets/icons/icon_2.png',
-            height: size.height / 3,
+            'assets/registration_background.png',
+            fit: BoxFit.fill,
           ),
         ),
-      ),
+        Container(
+          width: size.width,
+          height: size.height,
+          child: Center(
+            child: Image.asset(
+              'assets/registration_icon.png',
+              height: size.height / 4,
+              width: size.width * 0.8,
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

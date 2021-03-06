@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:qregister/src/app/constants.dart';
@@ -9,8 +10,8 @@ import 'package:qregister/src/app/pages/receipt_details/receipt_details_view.dar
 import 'package:qregister/src/app/widgets/progress_indicators.dart';
 import 'package:qregister/src/data/repositories/data_receipt_repository.dart';
 import 'package:qregister/src/data/repositories/data_user_repository.dart';
+import 'package:qregister/src/data/repositories/email_auth_repository.dart';
 import 'package:qregister/src/domain/entities/receipt.dart';
-import '../../widgets/error_alert_dialog.dart';
 
 class ProfileView extends View {
   @override
@@ -18,6 +19,7 @@ class ProfileView extends View {
         ProfileController(
           DataUserRepository(),
           DataReceiptRepository(),
+          EmailAuthRepository(),
         ),
       );
 }
@@ -30,6 +32,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
   Widget get view {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      key: globalKey,
       body: Column(
         children: [
           Container(
@@ -66,7 +69,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                 ),
                 Positioned(
                   top: size.height * 0.117,
-                  right: 25,
+                  left: 25,
                   child: IconButton(
                     onPressed: () => Navigator.of(context).push(
                       PageTransition(
@@ -80,7 +83,57 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                       color: kPrimaryColor5,
                     ),
                   ),
-                )
+                ),
+                Positioned(
+                  top: size.height * 0.117,
+                  right: 25,
+                  child: ControlledWidgetBuilder<ProfileController>(
+                    builder: (context, controller) => IconButton(
+                      onPressed: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              'Warning',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            content: Text(
+                              'You are about to be signed out. Are you sure?',
+                              style: GoogleFonts.openSans(),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    color: kPrimaryColor4.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () => controller.signOut(),
+                                child: Text(
+                                  'Sign Out',
+                                  style: TextStyle(
+                                    color: Colors.red[300],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.signOutAlt,
+                        size: 30,
+                        color: kPrimaryColor5,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

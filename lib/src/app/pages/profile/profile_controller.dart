@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:qregister/src/app/pages/profile/profile_presenter.dart';
+import 'package:qregister/src/app/pages/splash/splash_view.dart';
 import 'package:qregister/src/domain/entities/receipt.dart';
 import 'package:qregister/src/domain/entities/user.dart';
+import 'package:qregister/src/domain/repositories/auth_repository.dart';
 import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 import 'package:qregister/src/domain/repositories/user_repository.dart';
 import 'package:qregister/src/app/widgets/error_alert_dialog.dart';
@@ -13,7 +16,12 @@ class ProfileController extends Controller {
   ProfileController(
     UserRepository userRepository,
     ReceiptRepository receiptRepository,
-  ) : _presenter = ProfilePresenter(userRepository, receiptRepository);
+    AuthRepository authRepository,
+  ) : _presenter = ProfilePresenter(
+          userRepository,
+          receiptRepository,
+          authRepository,
+        );
 
   bool isLoading = true;
 
@@ -23,11 +31,6 @@ class ProfileController extends Controller {
   void onDisposed() {
     _presenter.dispose();
     super.onDisposed();
-  }
-
-  @override
-  void onInitState() {
-    super.onInitState();
   }
 
   @override
@@ -75,9 +78,30 @@ class ProfileController extends Controller {
         builder: (context) => errorAlertDialog(context),
       );
     };
+
+    _presenter.signOutOnComplete = () {
+      Navigator.of(getContext()).pushAndRemoveUntil(
+          PageTransition(
+            type: PageTransitionType.fade,
+            child: SplashView(),
+          ),
+          (route) => false);
+    };
+
+    _presenter.signOutOnError = (e) {
+      print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
+    };
   }
 
   void archiveReceiptOfUser(String id) {
     _presenter.archiveReceiptOfUser(id);
+  }
+
+  void signOut() {
+    _presenter.signOut();
   }
 }
