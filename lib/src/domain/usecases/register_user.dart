@@ -13,8 +13,8 @@ class RegisterUser extends UseCase<User, RegisterUserParams> {
   Future<Stream<User>> buildUseCaseStream(RegisterUserParams params) async {
     StreamController<User> controller = StreamController();
     try {
-      final user =
-          await _authRepository.registerUser(params.email, params.password);
+      final user = await _authRepository.registerUser(
+          params.email, params.password, params.firstName, params.lastName);
       controller.add(user);
       controller.close();
       logger.finest('RegisterUser Successful');
@@ -28,8 +28,15 @@ class RegisterUser extends UseCase<User, RegisterUserParams> {
 }
 
 class RegisterUserParams {
+  final String firstName;
+  final String lastName;
   final String email;
   final String password;
 
-  RegisterUserParams(this.email, this.password);
+  RegisterUserParams({
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+  });
 }

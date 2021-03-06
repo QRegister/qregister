@@ -1,20 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:qregister/src/domain/entities/user.dart';
 import 'package:qregister/src/domain/repositories/auth_repository.dart';
 
-class SignIn extends UseCase<User, SignInParams> {
+class SignIn extends UseCase<String, SignInParams> {
   final AuthRepository _authRepository;
 
   SignIn(this._authRepository);
 
   @override
-  Future<Stream<User>> buildUseCaseStream(params) async {
-    StreamController<User> controller = StreamController();
+  Future<Stream<String>> buildUseCaseStream(params) async {
+    StreamController<String> controller = StreamController();
     try {
-      final user = await _authRepository.signIn(params.email, params.password);
-      controller.add(user);
+      final uid = await _authRepository.signIn(params.email, params.password);
+      controller.add(uid);
       controller.close();
       logger.finest('SignIn Successful');
     } catch (error) {
