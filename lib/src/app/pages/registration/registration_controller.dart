@@ -18,6 +18,7 @@ class RegistrationController extends Controller {
   final formKey = GlobalKey<FormState>();
 
   String emailOfUser;
+  bool isLoading = false;
   bool isEmailChecked = false;
 
   @override
@@ -31,12 +32,15 @@ class RegistrationController extends Controller {
             ),
             (route) => false);
       } else {
+        isLoading = false;
         isEmailChecked = true;
         refreshUI();
       }
     };
 
     _presenter.checkIfUserRegisteredOnError = (e) {
+      isLoading = false;
+      refreshUI();
       print(e);
       showDialog(
         context: getContext(),
@@ -54,6 +58,8 @@ class RegistrationController extends Controller {
     };
 
     _presenter.registerUserOnError = (e) {
+      isLoading = false;
+      refreshUI();
       print(e);
       showDialog(
         context: getContext(),
@@ -69,6 +75,8 @@ class RegistrationController extends Controller {
   }
 
   void checkIfUserRegistered(String email) {
+    isLoading = true;
+    refreshUI();
     this.emailOfUser = email;
     _presenter.checkIfUserRegistered(email);
   }
@@ -83,9 +91,11 @@ class RegistrationController extends Controller {
         password != null &&
         firstName.length != 0 &&
         lastName.length != 0 &&
-        password != null)
+        password != null) {
       _presenter.registerUser(this.emailOfUser, password, firstName, lastName);
-    else {
+      isLoading = true;
+      refreshUI();
+    } else {
       showDialog(
         context: getContext(),
         builder: (context) => errorAlertDialog(
