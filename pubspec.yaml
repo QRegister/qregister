@@ -23,13 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: "0.7.0"
-  cloud_firestore: ^0.16.0+1
-  flutter_clean_architecture: ^4.1.1
+  firebase_core: "1.0.0"
+  firebase_auth: ^1.0.0
+  cloud_firestore: ^1.0.0
+  flutter_clean_architecture: ^5.0.0
   page_transition: ^1.1.7+6
   qr_code_scanner: ^0.3.5
-  convex_bottom_bar: ^2.7.1
-  google_fonts: ^1.1.2
+  convex_bottom_bar: ^2.7.1+2
+  google_fonts: ^2.0.0
   progress_indicators: ^0.1.5
   dotted_line: ^2.0.2
 
