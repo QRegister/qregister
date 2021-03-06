@@ -33,11 +33,16 @@ class EmailAuthRepository extends AuthRepository {
   @override
   Future<bool> checkIfUserRegistered(String email) async {
     try {
-      final snapshot = FirebaseFirestore.instance
+      final snapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('email', isEqualTo: email)
           .get();
-      return snapshot != null ? true : false;
+
+      return (snapshot != null &&
+              snapshot.docs != null &&
+              snapshot.docs.length != 0)
+          ? true
+          : false;
     } catch (e, st) {
       print(e);
       print(st);

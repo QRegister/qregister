@@ -28,7 +28,11 @@ class SignInController extends Controller {
       print(e);
       showDialog(
         context: getContext(),
-        builder: (context) => errorAlertDialog(context),
+        builder: (context) => errorAlertDialog(
+          context,
+          text1: 'Error',
+          text2: 'Email or password is incorrect',
+        ),
       );
     };
   }

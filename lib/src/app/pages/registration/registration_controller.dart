@@ -15,6 +15,8 @@ class RegistrationController extends Controller {
       : _presenter = RegistrationPresenter(authRepository),
         super();
 
+  final formKey = GlobalKey<FormState>();
+
   String emailOfUser;
   bool isEmailChecked = false;
 
@@ -74,9 +76,24 @@ class RegistrationController extends Controller {
   void registerUser(
     String firstName,
     String lastName,
-    String email,
     String password,
   ) {
-    _presenter.registerUser(email, password, firstName, lastName);
+    if (firstName != null &&
+        lastName != null &&
+        password != null &&
+        firstName.length != 0 &&
+        lastName.length != 0 &&
+        password != null)
+      _presenter.registerUser(this.emailOfUser, password, firstName, lastName);
+    else {
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(
+          context,
+          text1: 'Error',
+          text2: 'Please fill all the fields',
+        ),
+      );
+    }
   }
 }

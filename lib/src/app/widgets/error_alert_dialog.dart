@@ -18,7 +18,7 @@ Widget errorAlertDialog(
       ),
     ),
     content: Container(
-      height: 120,
+      height: 130,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,7 +41,7 @@ Widget errorAlertDialog(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Text(
                   text1,
@@ -53,11 +53,14 @@ Widget errorAlertDialog(
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  text2,
-                  style: GoogleFonts.openSans(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
+                Container(
+                  width: 150,
+                  child: Text(
+                    text2,
+                    style: GoogleFonts.openSans(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                    ),
                   ),
                 )
               ],
