@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qregister/src/app/pages/camera/camera_view_presenter.dart';
-import 'package:qregister/src/domain/entities/receipt.dart';
-import 'package:qregister/src/domain/repositories/receipt_repository.dart';
-import 'package:qregister/src/domain/repositories/user_repository.dart';
 import 'package:qregister/src/app/constants.dart';
+import 'package:qregister/src/app/pages/offline_camera/offline_camera_presenter.dart';
+import 'package:qregister/src/app/pages/receipt_details/receipt_details_view.dart';
 import 'package:qregister/src/app/widgets/error_alert_dialog.dart';
+import 'package:qregister/src/domain/entities/receipt.dart';
+import 'package:qregister/src/domain/repositories/file_repository.dart';
+import 'package:qregister/src/domain/repositories/inventory_repository.dart';
 
-class CameraViewController extends Controller {
-  final CameraPresenter _presenter;
-  final BuildContext homeContext;
+class OfflineCameraController extends Controller {
+  final OfflineCameraPresenter _presenter;
 
-  CameraViewController(
-    UserRepository userRepository,
-    ReceiptRepository receiptRepository,
-    this.homeContext,
-  ) : _presenter = CameraPresenter(userRepository, receiptRepository);
+  OfflineCameraController(
+      FileRepository fileRepository, InventoryRepository inventoryRepository)
+      : _presenter =
+            OfflineCameraPresenter(fileRepository, inventoryRepository);
 
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController qrViewController;
   Barcode scanResult;
+  Receipt foundReceipt;
 
   @override
   void initListeners() {
-    _presenter.addReceiptToUserOnNext = (String response) {
-      Scaffold.of(getContext()).showSnackBar(
-        SnackBar(
-          content: Text("Receipt has been added to your receipt list\n"),
+    _presenter.addReceiptIdToStorageOnComplete = () async {
+      await Navigator.of(getContext()).push(
+        PageTransition(
+          type: PageTransitionType.rightToLeft,
+          child: ReceiptDetailsView(
+            receipt: foundReceipt,
+          ),
         ),
       );
       scanResult = null;
     };
 
-    _presenter.addReceiptToUserOnError = (e) {
+    _presenter.addReceiptIdToStorageOnError = (e) {
       print(e);
       showDialog(
         context: getContext(),
@@ -42,9 +46,9 @@ class CameraViewController extends Controller {
       );
     };
 
-    _presenter.getReceiptByIdOnNext = (Receipt response) async {
+    _presenter.getReceiptFromHashOnNext = (Receipt response) async {
       await showDialog(
-        context: homeContext,
+        context: getContext(),
         barrierDismissible: false,
         builder: (ctx) {
           return AlertDialog(
@@ -75,7 +79,7 @@ class CameraViewController extends Controller {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(homeContext).pop();
+                  Navigator.of(getContext()).pop();
                   scanResult = null;
                 },
                 child: Text(
@@ -92,8 +96,9 @@ class CameraViewController extends Controller {
               FlatButton(
                 color: kPrimaryColor1,
                 onPressed: () {
-                  this.addReceiptToUser(response);
-                  Navigator.of(homeContext).pop();
+                  foundReceipt = response;
+                  _presenter.addReceiptIdToStorage(response.id);
+                  Navigator.of(getContext()).pop();
                 },
                 child: Text(
                   'Yes!',
@@ -112,14 +117,11 @@ class CameraViewController extends Controller {
       );
     };
 
-    _presenter.getReceiptByIdOnError = (e) async {
+    _presenter.getReceiptFromHashOnError = (e) {
+      print(e);
       showDialog(
-        context: homeContext,
-        builder: (context) => errorAlertDialog(
-          context,
-          text1: 'Error',
-          text2: 'Please scan again',
-        ),
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
       );
     };
   }
@@ -136,21 +138,9 @@ class CameraViewController extends Controller {
     this.qrViewController.scannedDataStream.listen((scanData) {
       if (scanResult == null) {
         scanResult = scanData;
-        this.getReceiptById(scanResult.code);
+        _presenter.getReceiptFromHash(scanResult.code);
       }
       refreshUI();
     });
-  }
-
-  void getReceiptById(String receiptId) {
-    _presenter.getReceiptById(receiptId);
-  }
-
-  void addReceiptToUser(Receipt receipt) {
-    _presenter.addReceiptToUser(receipt);
-  }
-
-  void refreshScreen() {
-    refreshUI();
   }
 }

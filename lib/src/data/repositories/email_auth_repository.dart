@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fireAuth;
 import 'package:qregister/src/domain/entities/user.dart';
 import 'package:qregister/src/domain/repositories/auth_repository.dart';
 
-class EmailAuthRepository extends AuthRepository {
+class EmailAuthRepository implements AuthRepository {
   static final _instance = EmailAuthRepository._internal();
 
   EmailAuthRepository._internal()

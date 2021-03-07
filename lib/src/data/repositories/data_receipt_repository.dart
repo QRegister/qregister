@@ -3,7 +3,7 @@ import 'package:qregister/src/data/mappers/receipt_mapper.dart';
 import 'package:qregister/src/domain/entities/receipt.dart';
 import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 
-class DataReceiptRepository extends ReceiptRepository {
+class DataReceiptRepository implements ReceiptRepository {
   static final _instance = DataReceiptRepository._internal();
 
   DataReceiptRepository._internal();

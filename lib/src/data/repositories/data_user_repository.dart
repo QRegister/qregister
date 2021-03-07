@@ -4,7 +4,7 @@ import 'package:qregister/src/domain/repositories/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fireAuth;
 
-class DataUserRepository extends UserRepository {
+class DataUserRepository implements UserRepository {
   static final _instance = DataUserRepository._internal();
 
   DataUserRepository._internal();

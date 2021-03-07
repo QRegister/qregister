@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:qregister/src/app/pages/splash/splash_controller.dart';
+import 'package:qregister/src/data/repositories/data_inventory_repository.dart';
 import 'package:qregister/src/data/repositories/data_receipt_repository.dart';
 import 'package:qregister/src/data/repositories/data_user_repository.dart';
 import 'package:qregister/src/data/repositories/email_auth_repository.dart';
+import 'package:qregister/src/device/repositories/device_internet_repository.dart';
 
 class SplashView extends View {
   @override
@@ -12,6 +14,8 @@ class SplashView extends View {
           DataUserRepository(),
           DataReceiptRepository(),
           EmailAuthRepository(),
+          DeviceInternetRepository(),
+          DataInventoryRepository(),
         ),
       );
 }
