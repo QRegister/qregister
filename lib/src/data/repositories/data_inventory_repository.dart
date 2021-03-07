@@ -17,7 +17,6 @@ class DataInventoryRepository implements InventoryRepository {
   @override
   Future<Receipt> getReceiptFromHash(String hash) async {
     try {
-      print(hash);
       List<String> itemCodeList = [];
       List<double> itemAmountList = [];
       List<String> otherInfosList = [];

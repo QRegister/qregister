@@ -136,7 +136,8 @@ class CameraViewController extends Controller {
     this.qrViewController.scannedDataStream.listen((scanData) {
       if (scanResult == null) {
         scanResult = scanData;
-        this.getReceiptById(scanResult.code);
+        String id = getReceiptIdFromHash(scanResult.code);
+        getReceiptById(id);
       }
       refreshUI();
     });
@@ -152,5 +153,27 @@ class CameraViewController extends Controller {
 
   void refreshScreen() {
     refreshUI();
+  }
+
+  String getReceiptIdFromHash(String hash) {
+    List<String> itemCodeList = [];
+    List<double> itemAmountList = [];
+    List<String> otherInfosList = [];
+    int index = 0;
+
+    for (int x = 0; x < hash.length; x++) {
+      if (hash[x] == "#") {
+        otherInfosList.add(hash.substring(index, x));
+        index = x + 1;
+      } else if (hash[x] == "?") {
+        itemCodeList.add(hash.substring(index, x));
+        index = x + 1;
+      } else if (hash[x] == "%") {
+        itemAmountList.add(double.tryParse(hash.substring(index, x)));
+        index = x + 1;
+      }
+    }
+    String receiptId = otherInfosList[3];
+    return receiptId;
   }
 }
