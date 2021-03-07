@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:qregister/src/app/constants.dart';
 import 'package:qregister/src/app/pages/camera/camera_view_view.dart';
 import 'package:qregister/src/app/pages/home/home_controller.dart';
@@ -22,6 +25,45 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
   _HomeViewState(HomeController controller) : super(controller);
   TabController tabController;
   int initIndex = 1;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // simply use this
+    if (widget.isUploaded) {
+      Timer.run(
+        () {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text(
+                'Hurray!',
+                style: GoogleFonts.openSans(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: Text(
+                'The receipts you scanned successfully uploaded to cloud',
+                style: GoogleFonts.openSans(),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(
+                    'OK!',
+                    style: TextStyle(
+                      color: kPrimaryColor2,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget get view {
