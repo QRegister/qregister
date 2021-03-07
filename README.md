@@ -2,7 +2,7 @@
 
 # QRegister
 
-<img src="https://github.com/QRegister/qregister-desktop/blob/main/qregister_logo.png" width="256">
+<img src="https://github.com/QRegister/qregister-desktop/blob/main/data/logos/qregister.png" width="256">
 
 ## Specs
 - You can access this page by swiping left on the Home page, or you can navigate using the bottom bar by tapping on the “Profile” icon on the far right.
