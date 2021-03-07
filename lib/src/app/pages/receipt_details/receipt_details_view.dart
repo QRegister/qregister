@@ -241,7 +241,7 @@ Widget productCard(BuildContext context, Product product) {
               children: [
                 Text(
                   '(' +
-                      product.count.toStringAsPrecision(1) +
+                      product.count.toStringAsFixed(2) +
                       ' x ' +
                       product.unitPrice.toStringAsFixed(2) +
                       ')',

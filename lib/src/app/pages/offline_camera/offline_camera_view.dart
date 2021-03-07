@@ -67,7 +67,7 @@ class _OfflineCameraViewState
             left: size.width / 4,
             child: Image.asset(
               'assets/registration_icon.png',
-              height: 200,
+              height: size.height * 0.3,
               width: size.width / 2,
             ),
           ),

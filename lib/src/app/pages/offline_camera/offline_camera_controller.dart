@@ -67,7 +67,7 @@ class OfflineCameraController extends Controller {
               'Store: ' +
                   response.storeLocation +
                   '\nTotal Cost: ' +
-                  response.totalPrice.toString(),
+                  response.totalPrice.toStringAsFixed(2),
               style: GoogleFonts.openSans(
                 textStyle: TextStyle(
                   fontSize: 21,

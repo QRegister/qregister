@@ -34,7 +34,7 @@ Widget errorAlertDialog(
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: 10,
+              left: 5,
               top: 12,
             ),
             child: Column(
@@ -54,7 +54,7 @@ Widget errorAlertDialog(
                   height: 10,
                 ),
                 Container(
-                  width: 150,
+                  width: size.width * 0.35,
                   child: Text(
                     text2,
                     style: GoogleFonts.openSans(
