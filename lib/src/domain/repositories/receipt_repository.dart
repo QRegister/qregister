@@ -8,4 +8,5 @@ abstract class ReceiptRepository {
   Future<Receipt> getReceiptById(String receiptId);
   List<Receipt> getReceiptsOfUser();
   List<Receipt> getArchivedReceiptsOfUser();
+  Future<bool> checkStorageForReceiptIdsAndUploadIfThereIsAny();
 }

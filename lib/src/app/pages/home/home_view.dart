@@ -8,9 +8,12 @@ import 'package:qregister/src/app/pages/info/info_view.dart';
 import 'package:qregister/src/app/pages/profile/profile_view.dart';
 
 class HomeView extends View {
+  final bool isUploaded;
+
+  HomeView(this.isUploaded);
   @override
   State<StatefulWidget> createState() => _HomeViewState(
-        HomeController(),
+        HomeController(isUploaded),
       );
 }
 

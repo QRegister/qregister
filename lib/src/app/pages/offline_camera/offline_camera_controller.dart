@@ -93,8 +93,7 @@ class OfflineCameraController extends Controller {
                   ),
                 ),
               ),
-              FlatButton(
-                color: kPrimaryColor1,
+              TextButton(
                 onPressed: () {
                   foundReceipt = response;
                   _presenter.addReceiptIdToStorage(response.id);
@@ -104,9 +103,9 @@ class OfflineCameraController extends Controller {
                   'Yes!',
                   style: GoogleFonts.openSans(
                     textStyle: TextStyle(
+                      color: kPrimaryColor1,
                       fontWeight: FontWeight.bold,
                       fontSize: 21,
-                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -117,12 +116,15 @@ class OfflineCameraController extends Controller {
       );
     };
 
-    _presenter.getReceiptFromHashOnError = (e) {
+    _presenter.getReceiptFromHashOnError = (e) async {
       print(e);
-      showDialog(
+      await showDialog(
         context: getContext(),
-        builder: (context) => errorAlertDialog(context),
+        builder: (context) =>
+            errorAlertDialog(context, text2: 'Please scan again'),
       );
+      scanResult = null;
+      refreshUI();
     };
   }
 

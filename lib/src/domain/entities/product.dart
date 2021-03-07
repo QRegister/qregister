@@ -19,7 +19,7 @@ class Product {
 
   Product.fromMap(Map<String, dynamic> map)
       : name = map['name'],
-        barcode = map['barcode'],
+        barcode = map['barcode'].toString(),
         unitOfMeasurement = map['unit-of-measurement'],
         unitPrice = map['unit-price'].toDouble(),
         count = map['count'].toDouble(),

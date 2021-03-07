@@ -33,16 +33,30 @@ class SplashController extends Controller {
   @override
   void initListeners() {
     _presenter.initializeAppOnComplete = () async {
+      _presenter.checkStorageForReceiptIdsAndUploadIfThereIsAny();
+    };
+
+    _presenter.initializeAppOnError = (e) {
+      print(e);
+      showDialog(
+        context: getContext(),
+        builder: (context) => errorAlertDialog(context),
+      );
+    };
+
+    _presenter.checkStorageForReceiptIdsAndUploadIfThereIsAnyOnNext =
+        (bool response) async {
+      // EMPTY PREFS
       await Future.delayed(Duration(seconds: 1));
       Navigator.of(getContext()).pushAndRemoveUntil(
           PageTransition(
             type: PageTransitionType.fade,
-            child: HomeView(),
+            child: HomeView(response),
           ),
           (route) => false);
     };
 
-    _presenter.initializeAppOnError = (e) {
+    _presenter.checkStorageForReceiptIdsAndUploadIfThereIsAnyOnError = (e) {
       print(e);
       showDialog(
         context: getContext(),

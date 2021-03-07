@@ -6,6 +6,7 @@ import 'package:qregister/src/domain/repositories/receipt_repository.dart';
 import 'package:qregister/src/domain/repositories/user_repository.dart';
 import 'package:qregister/src/domain/usecases/check_if_user_has_internet.dart';
 import 'package:qregister/src/domain/usecases/check_if_user_signed_in.dart';
+import 'package:qregister/src/domain/usecases/check_storage_for_receipt_ids_and_upload_if_there_is_any.dart';
 import 'package:qregister/src/domain/usecases/initialize_app.dart';
 import 'package:qregister/src/domain/usecases/read_inventory_csv.dart';
 
@@ -22,10 +23,15 @@ class SplashPresenter extends Presenter {
   Function readInventoryCsvOnComplete;
   Function readInventoryCsvOnError;
 
+  Function checkStorageForReceiptIdsAndUploadIfThereIsAnyOnNext;
+  Function checkStorageForReceiptIdsAndUploadIfThereIsAnyOnError;
+
   final InitializeApp _initializeApp;
   final CheckIfUserSignedIn _checkIfUserSignedIn;
   final CheckIfUserHasInternet _checkIfUserHasInternet;
   final ReadInventoryCsv _readInventoryCsv;
+  final CheckStorageForReceiptIdsAndUploadIfThereIsAny
+      _checkStorageForReceiptIdsAndUploadIfThereIsAny;
 
   SplashPresenter(
     UserRepository userRepository,
@@ -36,7 +42,9 @@ class SplashPresenter extends Presenter {
   )   : _initializeApp = InitializeApp(receiptRepository, userRepository),
         _checkIfUserSignedIn = CheckIfUserSignedIn(authRepository),
         _checkIfUserHasInternet = CheckIfUserHasInternet(internetRepository),
-        _readInventoryCsv = ReadInventoryCsv(inventoryRepository);
+        _readInventoryCsv = ReadInventoryCsv(inventoryRepository),
+        _checkStorageForReceiptIdsAndUploadIfThereIsAny =
+            CheckStorageForReceiptIdsAndUploadIfThereIsAny(receiptRepository);
 
   @override
   void dispose() {
@@ -44,6 +52,7 @@ class SplashPresenter extends Presenter {
     _checkIfUserSignedIn.dispose();
     _checkIfUserHasInternet.dispose();
     _readInventoryCsv.dispose();
+    _checkStorageForReceiptIdsAndUploadIfThereIsAny.dispose();
   }
 
   void initializeApp() {
@@ -60,6 +69,11 @@ class SplashPresenter extends Presenter {
 
   void readInventoryCsv() {
     _readInventoryCsv.execute(ReadInventoryCsvObserver(this));
+  }
+
+  void checkStorageForReceiptIdsAndUploadIfThereIsAny() {
+    _checkStorageForReceiptIdsAndUploadIfThereIsAny
+        .execute(CheckStorageForReceiptIdsAndUploadIfThereIsAnyObserver(this));
   }
 }
 
@@ -142,4 +156,27 @@ class ReadInventoryCsvObserver extends Observer<void> {
 
   @override
   void onNext(_) {}
+}
+
+class CheckStorageForReceiptIdsAndUploadIfThereIsAnyObserver
+    extends Observer<bool> {
+  final SplashPresenter _presenter;
+
+  CheckStorageForReceiptIdsAndUploadIfThereIsAnyObserver(this._presenter);
+  @override
+  void onComplete() {}
+
+  @override
+  void onError(e) {
+    assert(_presenter.checkStorageForReceiptIdsAndUploadIfThereIsAnyOnError !=
+        null);
+    _presenter.checkStorageForReceiptIdsAndUploadIfThereIsAnyOnError(e);
+  }
+
+  @override
+  void onNext(bool response) {
+    assert(_presenter.checkStorageForReceiptIdsAndUploadIfThereIsAnyOnNext !=
+        null);
+    _presenter.checkStorageForReceiptIdsAndUploadIfThereIsAnyOnNext(response);
+  }
 }

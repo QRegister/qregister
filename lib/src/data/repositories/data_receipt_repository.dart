@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qregister/src/data/mappers/receipt_mapper.dart';
 import 'package:qregister/src/domain/entities/receipt.dart';
 import 'package:qregister/src/domain/repositories/receipt_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DataReceiptRepository implements ReceiptRepository {
   static final _instance = DataReceiptRepository._internal();
@@ -11,6 +13,7 @@ class DataReceiptRepository implements ReceiptRepository {
   factory DataReceiptRepository() => _instance;
 
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static final FirebaseAuth _fireAuth = FirebaseAuth.instance;
 
   List<Receipt> _receipts = [];
   List<Receipt> _archivedReceipts = [];
@@ -69,6 +72,47 @@ class DataReceiptRepository implements ReceiptRepository {
   @override
   List<Receipt> getReceiptsOfUser() {
     return this._receipts;
+  }
+
+  @override
+  Future<bool> checkStorageForReceiptIdsAndUploadIfThereIsAny() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<String> receiptIdList = prefs.getStringList('receiptIds');
+      if (receiptIdList == null || receiptIdList.length == 0) {
+        return false;
+      }
+
+      List<Map<String, dynamic>> receiptMapList = [];
+
+      await Future.forEach(receiptIdList, (id) async {
+        final snapshot = await _firestore.collection('receipts').doc(id).get();
+        if (snapshot.data() != null) receiptMapList.add(snapshot.data());
+      });
+
+      // Firestore update
+
+      await _firestore
+          .collection('users')
+          .doc(_fireAuth.currentUser.uid)
+          .update({
+        'receipts': FieldValue.arrayUnion(receiptMapList),
+      });
+
+      // Initialized repository update
+
+      receiptMapList.forEach((map) {
+        this._receipts.add(ReceiptMapper.createReceiptFromMap(map));
+      });
+
+      prefs.remove('receiptIds');
+
+      return true;
+    } catch (e, st) {
+      print(e);
+      print(st);
+      rethrow;
+    }
   }
 
   @override
