@@ -90,13 +90,13 @@ class SplashController extends Controller {
     };
 
     _presenter.readInventoryCsvOnComplete = () {
-      Navigator.of(getContext()).pushAndRemoveUntil(
-        PageTransition(
-          type: PageTransitionType.fade,
-          child: OfflineCameraView(),
-        ),
-        (route) => false,
-      );
+      // Navigator.of(getContext()).pushAndRemoveUntil(
+      //   PageTransition(
+      //     type: PageTransitionType.fade,
+      //     child: OfflineCameraView(),
+      //   ),
+      //   (route) => false,
+      // );
     };
 
     _presenter.readInventoryCsvOnError = (e) {

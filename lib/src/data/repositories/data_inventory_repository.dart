@@ -1,36 +1,27 @@
+import 'package:csv/csv.dart';
 import 'package:qregister/src/domain/entities/product.dart';
 import 'package:qregister/src/domain/entities/receipt.dart';
 import 'package:qregister/src/domain/repositories/inventory_repository.dart';
+import 'package:flutter/services.dart';
 
 class DataInventoryRepository implements InventoryRepository {
+  static final _instance = DataInventoryRepository._internal();
+
+  DataInventoryRepository._internal();
+
+  factory DataInventoryRepository() => _instance;
+
+  List<List<dynamic>> csvData;
+
   @override
-  Future<Receipt> getReceiptFromHash(String hash) async {
-    print('receipt dehashed');
-    return Receipt(
-      cashierName: 'Humeyra',
-      date: DateTime.now(),
-      id: 'xxxxxxx',
-      products: [
-        Product(
-          barcode: '1',
-          count: 1.0,
-          name: 'Carrot',
-          taxRate: 18,
-          unitOfMeasurement: 'KG',
-          unitPrice: 1.60,
-        ),
-      ],
-      storeLocation: 'Migros ODTU',
-      storeLocationAddress: 'ODTU Dedik Ya',
-      storeName: 'Migros',
-      storeSlug: 'migros',
-      totalPrice: 50,
-      totalTax: 15,
-    );
-  }
+  Future<Receipt> getReceiptFromHash(String hash) async {}
 
   @override
   Future<void> readInventoryCsv() async {
-    print("READING CSV");
+    final csvString = await rootBundle.loadString('assets/files/inventory.csv');
+    final List<List<dynamic>> convertedCsvData =
+        CsvToListConverter().convert(csvString);
+
+    this.csvData = convertedCsvData;
   }
 }
