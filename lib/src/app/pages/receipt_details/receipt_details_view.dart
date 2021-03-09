@@ -9,7 +9,8 @@ import '../../constants.dart';
 class ReceiptDetailsView extends StatelessWidget {
   final Receipt receipt;
 
-  const ReceiptDetailsView({Key key, this.receipt}) : super(key: key);
+  ReceiptDetailsView({Key key, this.receipt}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     String timeHour = receipt.date.hour.toString().length == 1
@@ -18,7 +19,7 @@ class ReceiptDetailsView extends StatelessWidget {
     String timeMinute = receipt.date.minute.toString().length == 1
         ? '0' + receipt.date.minute.toString()
         : receipt.date.minute.toString();
-    ;
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
@@ -119,23 +120,17 @@ class ReceiptDetailsView extends StatelessWidget {
                 Container(
                   width: size.width * 0.8,
                   height: size.height * 0.4,
-                  child: NotificationListener<OverscrollIndicatorNotification>(
-                    onNotification: (overscroll) {
-                      overscroll.disallowGlow();
-                      return true;
+                  child: ListView.builder(
+                    itemCount: receipt.products.length,
+                    itemBuilder: (context, index) {
+                      return productCard(
+                          context, receipt.products.elementAt(index));
                     },
-                    child: ListView.builder(
-                      itemCount: receipt.products.length,
-                      itemBuilder: (context, index) {
-                        return productCard(
-                            context, receipt.products.elementAt(index));
-                      },
-                    ),
                   ),
                 ),
                 DottedLine(
                   direction: Axis.horizontal,
-                  lineLength: size.width * 0.8,
+                  lineLength: size.width * 0.81,
                   lineThickness: 1.0,
                   dashLength: 4.0,
                   dashColor: kPrimaryColor2,

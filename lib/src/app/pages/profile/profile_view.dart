@@ -31,6 +31,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
   @override
   Widget get view {
     Size size = MediaQuery.of(context).size;
+    double heightDiff = (size.height - 750) > 0 ? size.height - 750 : 0;
     return Scaffold(
       key: globalKey,
       body: Column(
@@ -138,7 +139,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
             ),
           ),
           Container(
-            height: size.height * 0.69,
+            height: size.height * 0.69 - heightDiff,
             child: ControlledWidgetBuilder<ProfileController>(
               builder: (context, controller) => Stack(
                 children: [
