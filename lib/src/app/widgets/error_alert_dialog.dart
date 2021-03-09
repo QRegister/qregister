@@ -87,7 +87,7 @@ Widget errorAlertDialog(
                 ),
                 child: IconButton(
                   padding: EdgeInsets.all(0),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.of(context).pop(),
                   icon: Icon(
                     Icons.close,
                     size: 20,

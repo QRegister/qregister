@@ -49,7 +49,7 @@ class DataReceiptRepository implements ReceiptRepository {
     // Local repository update
 
     this._archivedReceipts.add(this._receipts.elementAt(index));
-    this._archivedReceipts.removeAt(index);
+    this._receipts.removeAt(index);
 
     return receiptId;
   }
@@ -90,18 +90,24 @@ class DataReceiptRepository implements ReceiptRepository {
         if (snapshot.data() != null) receiptMapList.add(snapshot.data());
       });
 
+      List<Map<String, dynamic>> sanitizedReceiptMapList = [];
+
+      receiptMapList.forEach((receipt) {
+        sanitizedReceiptMapList.add(ReceiptMapper.sanitizeReceiptMap(receipt));
+      });
+
       // Firestore update
 
       await _firestore
           .collection('users')
           .doc(_fireAuth.currentUser.uid)
           .update({
-        'receipts': FieldValue.arrayUnion(receiptMapList),
+        'receipts': FieldValue.arrayUnion(sanitizedReceiptMapList),
       });
 
       // Initialized repository update
 
-      receiptMapList.forEach((map) {
+      sanitizedReceiptMapList.forEach((map) {
         this._receipts.add(ReceiptMapper.createReceiptFromMap(map));
       });
 

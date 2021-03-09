@@ -11,7 +11,6 @@ class DeviceFileRepository implements FileRepository {
   @override
   Future<void> addReceiptIdToStorage(String receiptId) async {
     try {
-      print(receiptId);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List<String> receiptIdList = prefs.getStringList('receiptIds');
       if (receiptIdList != null &&
@@ -22,7 +21,6 @@ class DeviceFileRepository implements FileRepository {
       } else {
         prefs.setStringList('receiptIds', [receiptId]);
       }
-      print(prefs.getStringList('receiptIds'));
     } catch (e, st) {
       print(e);
       print(st);

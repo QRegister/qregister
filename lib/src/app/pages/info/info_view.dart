@@ -7,7 +7,6 @@ class InfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double heightDiff = (size.height - 750) > 0 ? size.height - 750 : 0;
-    print(size.height);
     return Scaffold(
       body: Column(
         children: [
