@@ -18,9 +18,11 @@ Widget errorAlertDialog(
       ),
     ),
     content: Container(
-      height: text2.length < 48
-          ? size.height * 0.16
-          : size.height * (0.16 + (text2.length - 48) / 16 * 0.04),
+      height: text2.length < 18
+          ? size.height * 0.12
+          : text2.length < 48
+              ? size.height * 0.16
+              : size.height * (0.16 + (text2.length - 48) / 16 * 0.04),
       width: size.width * 0.7,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
