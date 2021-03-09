@@ -55,7 +55,6 @@ class ProfileController extends Controller {
     _presenter.getReceiptsOfUserOnNext = (List<Receipt> response) async {
       receiptsOfUser = response;
       isLoading = false;
-      await Future.delayed(Duration(milliseconds: 1000));
       refreshUI();
     };
 

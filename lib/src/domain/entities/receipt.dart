@@ -4,7 +4,7 @@ import 'package:qregister/src/domain/entities/product.dart';
 class Receipt {
   String id;
   final String cashierName;
-  final DateTime date;
+  DateTime date;
   final List<Product> products;
   final String storeLocation;
   final String storeLocationAddress;

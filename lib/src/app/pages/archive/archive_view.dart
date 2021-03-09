@@ -30,7 +30,7 @@ class _ArchiveViewState extends ViewState<ArchiveView, ArchiveController> {
         children: [
           Container(
             width: size.width,
-            height: size.height * 0.12,
+            height: size.height * 0.11,
             child: Stack(
               children: [
                 Align(
@@ -42,7 +42,7 @@ class _ArchiveViewState extends ViewState<ArchiveView, ArchiveController> {
                       icon: Icon(
                         Icons.arrow_back,
                         color: kPrimaryColor4,
-                        size: 30,
+                        size: size.width * 0.08,
                       ),
                     ),
                   ),
@@ -52,10 +52,10 @@ class _ArchiveViewState extends ViewState<ArchiveView, ArchiveController> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      'Archived Receipts',
+                      ' Archived Receipts',
                       style: GoogleFonts.openSans(
                         color: kPrimaryColor4,
-                        fontSize: 25,
+                        fontSize: size.width * 0.06,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -114,12 +114,7 @@ Widget archivedReceiptCard(
     isStoreExist = false;
   }
 
-  return FlatButton(
-    splashColor: Colors.transparent,
-    focusColor: Colors.transparent,
-    hoverColor: Colors.transparent,
-    highlightColor: Colors.transparent,
-    padding: EdgeInsets.zero,
+  return TextButton(
     onPressed: () => Navigator.of(context).push(
       PageTransition(
         child: ReceiptDetailsView(
@@ -130,56 +125,65 @@ Widget archivedReceiptCard(
     ),
     child: Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 35),
-          child: Container(
-            width: size.width - 20,
-            height: 75,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: archivedReceiptCardShadowList(),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Image.asset(
-                    imagePath,
-                    width: isStoreExist ? 60 : 60,
-                    height: isStoreExist ? 60 : 150,
-                  ),
+        Container(
+          width: size.width * 0.85,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: archivedReceiptCardShadowList(),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                child: Image.asset(
+                  imagePath,
+                  width: size.width * 0.15,
+                  height: isStoreExist ? 60 : 150,
                 ),
-                Container(
-                  width: size.width * 0.52,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: size.width * 0.4,
-                        child: Text(
-                          '${receipt.storeLocation}',
-                          style: GoogleFonts.openSans(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
+              ),
+              Container(
+                width: size.width * 0.55,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minWidth: size.width * 0.4,
+                          maxWidth: size.width * 0.4,
+                          minHeight: size.height * 0.08,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${receipt.storeLocation}',
+                            style: GoogleFonts.openSans(
+                              fontWeight: FontWeight.w600,
+                              fontSize: size.width * 0.041,
+                              color: kPrimaryColor4,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.start,
                           ),
                         ),
                       ),
-                      Text(
-                        '${receipt.totalPrice.toString()}',
-                        style: GoogleFonts.openSans(
-                          color: Colors.black,
-                        ),
+                    ),
+                    Text(
+                      '${receipt.totalPrice.toString()}',
+                      style: GoogleFonts.openSans(
+                        color: kPrimaryColor4,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         SizedBox(
-          height: 30,
+          height: size.height * 0.05,
         ),
       ],
     ),

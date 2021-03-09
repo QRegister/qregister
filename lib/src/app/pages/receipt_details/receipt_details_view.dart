@@ -12,6 +12,13 @@ class ReceiptDetailsView extends StatelessWidget {
   const ReceiptDetailsView({Key key, this.receipt}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    String timeHour = receipt.date.hour.toString().length == 1
+        ? '0' + receipt.date.hour.toString()
+        : receipt.date.hour.toString();
+    String timeMinute = receipt.date.minute.toString().length == 1
+        ? '0' + receipt.date.minute.toString()
+        : receipt.date.minute.toString();
+    ;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
@@ -28,7 +35,7 @@ class ReceiptDetailsView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: size.height * 0.025,
+                  height: size.height * 0.05,
                 ),
                 Container(
                   width: size.width * 0.6,
@@ -41,10 +48,12 @@ class ReceiptDetailsView extends StatelessWidget {
                         receipt.storeLocation,
                         style: GoogleFonts.openSans(
                           color: kPrimaryColor4,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.w700,
                         ),
                         textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -89,10 +98,7 @@ class ReceiptDetailsView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Time: ' +
-                            receipt.date.hour.toString() +
-                            ':' +
-                            receipt.date.minute.toString(),
+                        'Time: ' + timeHour + ':' + timeMinute,
                         style: GoogleFonts.openSans(
                           color: kPrimaryColor4,
                           fontSize: 15,
@@ -197,7 +203,7 @@ class ReceiptDetailsView extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(25, 44, 0, 0),
+              padding: EdgeInsets.fromLTRB(25, size.height * 0.09, 0, 0),
               child: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(
@@ -219,7 +225,7 @@ Widget productCard(BuildContext context, Product product) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        width: MediaQuery.of(context).size.width * 0.6,
+        width: MediaQuery.of(context).size.width * 0.58,
         child: Text(
           product.name,
           style: GoogleFonts.openSans(

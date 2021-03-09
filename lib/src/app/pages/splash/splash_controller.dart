@@ -68,7 +68,7 @@ class SplashController extends Controller {
       if (response) {
         _presenter.initializeApp();
       } else {
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(Duration(milliseconds: 1500));
         Navigator.of(getContext()).pushAndRemoveUntil(
           PageTransition(
             type: PageTransitionType.fade,

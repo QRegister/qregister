@@ -50,7 +50,7 @@ class _SignInViewState extends ViewState<SignInView, SignInController> {
                 ),
               ),
               Positioned(
-                top: size.height * 0.37,
+                top: size.height * 0.35,
                 child: Container(
                   width: size.width,
                   child: Center(
@@ -73,7 +73,7 @@ class _SignInViewState extends ViewState<SignInView, SignInController> {
                 ),
               ),
               Positioned(
-                top: size.height * 0.47,
+                top: size.height * 0.45,
                 left: size.width * 0.1,
                 child: Container(
                   width: size.width * 0.8,

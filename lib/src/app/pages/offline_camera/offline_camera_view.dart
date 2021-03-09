@@ -47,7 +47,7 @@ class _OfflineCameraViewState
           ),
           Positioned(
             left: 0,
-            bottom: size.height * 0.22,
+            bottom: size.height * 0.20,
             child: Container(
               width: size.width,
               child: Center(
@@ -56,7 +56,7 @@ class _OfflineCameraViewState
                   style: GoogleFonts.openSans(
                     textStyle: TextStyle(
                       color: Colors.white,
-                      fontSize: 25,
+                      fontSize: size.width * 0.07,
                     ),
                   ),
                 ),
@@ -83,8 +83,8 @@ class _OfflineCameraViewState
                   'OFFLINE',
                   style: GoogleFonts.openSans(
                     color: kPrimaryColor5,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontSize: size.width * 0.032,
+                    fontWeight: FontWeight.w600,
                     letterSpacing: 3,
                   ),
                   textAlign: TextAlign.center,
@@ -102,7 +102,7 @@ class _OfflineCameraViewState
                   'Your receipt will be uploaded to cloud \nonce you have internet connection',
                   style: GoogleFonts.openSans(
                     color: kPrimaryColor5,
-                    fontSize: 15,
+                    fontSize: size.width * 0.04,
                   ),
                   textAlign: TextAlign.center,
                 ),

@@ -53,7 +53,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                   ),
                 ),
                 Positioned(
-                  top: size.height * 0.12,
+                  top: size.height * 0.125,
                   child: Container(
                     width: size.width,
                     child: Center(
@@ -61,7 +61,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                         'My Receipts',
                         style: GoogleFonts.openSans(
                           color: kPrimaryColor5,
-                          fontSize: 30,
+                          fontSize: size.width * 0.075,
                         ),
                       ),
                     ),
@@ -69,7 +69,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                 ),
                 Positioned(
                   top: size.height * 0.117,
-                  left: 25,
+                  left: size.width * 0.07,
                   child: IconButton(
                     onPressed: () => Navigator.of(context).push(
                       PageTransition(
@@ -86,7 +86,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                 ),
                 Positioned(
                   top: size.height * 0.117,
-                  right: 25,
+                  right: size.width * 0.07,
                   child: ControlledWidgetBuilder<ProfileController>(
                     builder: (context, controller) => IconButton(
                       onPressed: () async {
@@ -245,23 +245,25 @@ Widget receiptCard(
     isStoreExist = false;
   }
 
-  return FlatButton(
-    splashColor: Colors.transparent,
-    focusColor: Colors.transparent,
-    hoverColor: Colors.transparent,
-    highlightColor: Colors.transparent,
-    onPressed: () => Navigator.of(context).push(PageTransition(
+  return TextButton(
+    onPressed: () => Navigator.of(context).push(
+      PageTransition(
         child: ReceiptDetailsView(
           receipt: receipt,
         ),
-        type: PageTransitionType.rightToLeft)),
-    padding: EdgeInsets.all(0),
+        type: PageTransitionType.rightToLeft,
+      ),
+    ),
     child: Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 35),
+          padding: EdgeInsets.symmetric(
+            horizontal: size.width * 0.07,
+          ),
           child: Dismissible(
-            key: Key(receipt.date.toString()),
+            key: Key(
+              receipt.id.toString(),
+            ),
             background: Container(),
             secondaryBackground: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -279,7 +281,7 @@ Widget receiptCard(
             confirmDismiss: (direction) async {
               if (direction == DismissDirection.endToStart) {
                 await archiveReceiptOfUser(receipt.id);
-                Scaffold.of(context).showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Receipt has been archived\n")));
                 return true;
               } else {
@@ -287,8 +289,7 @@ Widget receiptCard(
               }
             },
             child: Container(
-              width: size.width - 20,
-              height: 75,
+              width: size.width * 0.85,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: receiptCardShadowList(),
@@ -297,33 +298,46 @@ Widget receiptCard(
               child: Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.03),
                     child: Image.asset(
                       imagePath,
-                      width: isStoreExist ? 60 : 60,
+                      width: size.width * 0.15,
                       height: isStoreExist ? 60 : 150,
                     ),
                   ),
                   Container(
-                    width: size.width * 0.52,
+                    width: size.width * 0.54,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: size.width * 0.4,
-                          child: Text(
-                            '${receipt.storeLocation}',
-                            style: GoogleFonts.openSans(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minWidth: size.width * 0.4,
+                              maxWidth: size.width * 0.4,
+                              minHeight: size.height * 0.08,
                             ),
-                            overflow: TextOverflow.ellipsis,
+                            child: Center(
+                              child: Text(
+                                '${receipt.storeLocation}',
+                                style: GoogleFonts.openSans(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: size.width * 0.041,
+                                  color: kPrimaryColor4,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
                           ),
                         ),
                         Text(
                           '${receipt.totalPrice.toString()}',
                           style: GoogleFonts.openSans(
-                            color: Colors.black,
+                            color: kPrimaryColor4,
                           ),
                         ),
                       ],
@@ -335,7 +349,7 @@ Widget receiptCard(
           ),
         ),
         SizedBox(
-          height: 30,
+          height: size.height * 0.05,
         ),
       ],
     ),

@@ -33,7 +33,6 @@ class ArchiveController extends Controller {
         (List<Receipt> response) async {
       archivedReceiptsOfUser = response;
       isLoading = false;
-      await Future.delayed(Duration(milliseconds: 500));
       refreshUI();
     };
 
