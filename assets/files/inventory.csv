@@ -1,7 +1,152 @@
 item_code,barcode,name,unit_price,unit_of_measurement,tax_rate
-1,1001,Havuç,1.5,kg,8
+1,1001,Havuc,1.5,kg,8
 2,1002,Dardanel Ton 2x150g,30,number,8
 3,1003,Portakal Finike,9.99,number,8
 4,1004,Roka,4.95,kg,8
 5,1005,Dr Oetker Hamur Kabartma,4.65,number,18
 6,1006,Gawin Grapefruit,7.65,kg,8
+7,1007,Kanet Kakao,2.9,number,8
+8,1008,Artok Elma,1.95,kg,5
+9,1009,Nestle Nesquik,12.95,number,9
+10,1010,McQueen Chocolate Bar,3.9,number,8
+11,1011,Barilla Linguini,4.95,number,8
+12,1012,Reis Mercimek,35.9,number,8
+13,1013,Pril Limon Deterjan,5.95,number,8
+14,1014,Mandalina,7.75,kg,8
+15,1015,Amasya Armudu,7.25,kg,8
+16,1016,Namet Tavuk,19.95,kg,8
+17,1017,Kuzeyden Su x6,12.45,number,8
+18,1018,Colgate Zero Peppermint,31.5,number,8
+19,1019,Tavuk Teriyaki,22.9,number,8
+20,1020,Filiz Fiyonk,3.85,number,8
+21,1021,Arabiata Soslu Makarna,6.95,number,8
+22,1022,Twix Dondurma,8,number,8
+23,1023,Raya Yumurta,21.5,number,8
+24,1024,Eker Kasar,16.95,number,8
+25,1025,Lifalif Yulaf Ezmesi,13.75,number,8
+26,1026,Activex Sabun,17.95,number,8
+27,1027,Nara Nohut,25.9,number,8
+28,1028,Koala Kahve,8.95,number,8
+29,1029,Kestane,23.95,kg,9
+30,1030,Ayva,6.95,kg,8
+31,1031,Uno Tost Ekmegi,5.95,number,8
+32,1032,Eti Karam,4.75,number,8
+33,1033,Milka Oreo,10.85,number,8
+34,1034,Eker Kaymak,17.75,number,8
+35,1035,Bizim Paket Margarin,4.35,number,8
+36,1036,Special K Classic,13.95,number,8
+37,1037,Nutella Go,6.95,number,8
+38,1038,Parmak Patates,7.75,number,8
+39,1039,Knorr Ezogelin,4.15,number,8
+40,1040,Kokteyl Domates,5.75,kg,8
+41,1041,Sivri Biber,7.75,kg,8
+42,1042,Patates,8.95,kg,8
+43,1043,Golf Bravo Dondurma,7.5,number,8
+44,1044,Sofia Kagit Havlu,41.9,number,8
+45,1045,Pringles Paprika,16.95,number,10
+46,1046,Cornetto Rose,5,number,5
+47,1047,Carte D'Or Cookie,20.5,number,8
+48,1048,Head and Shoulders Shampoo,22.5,number,7
+49,1049,Molfix Bez,39.9,number,10
+50,1050,Persil Jel Hijyen,32.9,number,9
+51,1051,Yesil Elma,6.75,kg,9
+52,1052,Nar,7.95,kg,4
+53,1053,Yayla Baldo Pirinc,17.95,number,6
+54,1054,Filiz Irmik,4.35,number,7
+55,1055,Tat Domates Rendesi,7.95,number,5
+56,1056,Heinz Hardal,21.95,number,8
+57,1057,Barilla Pesto Sosu,15,number,9
+58,1058,Sinangil Un,10.15,number,6
+59,1059,Yudum Yag,24.75,number,9
+60,1060,Kemal Al Soya Sosu,9.95,number,8
+61,1061,Bonfilet Dana Antrikot,100,kg,7
+62,1062,Marmarabirlik Zeytin,10.5,number,9
+63,1063,Gliss Biotech Shampoo,23.65,number,4
+64,1064,Sek Sut,7.95,number,6
+65,1065,Freely 10'lu Maske,15.6,number,9
+66,1066,Vitala Krema,26.9,number,12
+67,1067,Eti Nimbo,2.7,number,6
+68,1068,Haribo Cola,5.15,number,4
+69,1069,Snickers,4.05,number,8
+70,1070,Ulker Caramio,3.95,number,7
+71,1071,Tat Dermason Fasulye,31.9,number,8
+72,1072,Reis Barbunya,34.95,number,8
+73,1073,Sade Organik Nohut,24.9,number,8
+74,1074,Royal Reis Amarant,37.5,number,18
+75,1075,Oba Spaghetti,2.25,number,6
+76,1076,Komili Aycicek Yag,19.7,number,8
+77,1077,Yudum Egemden Riviera,44.5,number,9
+78,1078,Tezek Taze Fasulye,11.95,number,8
+79,1079,Tez Enginar,37.9,number,8
+80,1080,Superfresh Misir,14.9,number,8
+81,1081,Billur Tuz,4.3,number,8
+82,1082,Ada Karabiber,3,number,8
+83,1083,Lipton Limonlu Ice Tea,4.95,number,8
+84,1084,Hayat Su,5.5,number,7
+85,1085,Redbull,7.95,number,8
+86,1086,Colombian Filtre Kahve,8.6,number,8
+87,1087,I Run Ayran,5.15,number,8
+88,1088,Frico Maasdam Peynir,43,number,8
+89,1089,Kerrygold Cheddar,42.9,number,8
+90,1090,Barilla Burgu,5.25,number,8
+91,1091,Kuhne Teriyaki Sos,19.95,number,8
+92,1092,Reis Pilavlik Bulgur,8.95,number,8
+93,1093,Koroplast Buzdolap Torbasi,18.5,number,8
+94,1094,Peton Kedi Mamasi,39.9,number,12
+95,1095,Frico Gouda Otlu,47,number,8
+96,1096,Tikvesli Krema,8.95,number,8
+97,1097,Keko Kekik,2.35,number,7
+98,1098,Selo Salep,19.85,number,8
+99,1099,Magnum Mini Badem,26.5,number,8
+100,1100,Omo Bulasik Tozu,9.9,number,8
+101,1101,Muz Yerli,9.4,kg,5
+102,1102,Santamaria Armut,7.45,kg,4
+103,1103,Elma Granny Smith,7.55,kg,8
+104,1104,Koko Kivi,3.8,kg,8
+105,1105,Mandalina Murcot,6.6,kg,8
+105,1105,Erikli Elmali Dogal Mineralli Aromali Gazli Icecek,12.9,number,8
+106,1106,Erikli Ahududulu Dogal Mineralli Aromali Gazli Icecek,12.9,number,8
+107,1107,Calve Fistik Ezmesi,38.8,number,8
+108,1108,Knorr Cig Kofte,6.45,number,8
+109,1109,Gliss Nutri Balance Sac Kremi,18.25,number,8
+110,1110,Icim Organik Sut,11.3,number,8
+111,1111,Knorr Refika'dan Mantarli Kuskuslu Tavuk Corbasi,6.45,number,8
+112,1112,Papilion Yeni Bebek Islak Havlu,26.9,number,8
+113,1113,Vitala Sprey Krema,26.9,number,8
+114,1114,Ulker Cikolatali Gofret Extra Sutlu Findikli,2.7,number,8
+115,1115,Oreo Double Kremali Biskuvi,16.15,number,8
+116,1116,Haribo Phantasia,5.15,number,8
+117,1117,Areka Mint Naneli Seker,13.3,number,8
+118,1118,Yumos Siyah Bakim Deterjani,32.3,number,8
+119,1119,Pringles Eksi Krema & Sogan,9.35,number,8
+120,1120,Erikli Su 500ml,1.7,number,8
+121,1121,Erikli Su 1.5L,3.1,number,8
+122,1122,Portakal,8.975,kg,8
+123,1123,Kokteyl Domates,16.9,kg,8
+124,1124,Salatalik,10.9,kg,8
+125,1125,Kapya Biber,17.9,kg,8
+126,1126,Limon,9.9,kg,8
+127,1127,Gobek Marul,6.95,number,8
+128,1128,Sogan,4.9,kg,8
+129,1129,Soke Un,9.2,number,8
+130,1130,Filiz Spaghetti,3.95,number,8
+131,1131,Filiz Burgu,3.95,number,8
+132,1132,Filiz Sade Kuskus,3.95,number,8
+133,1133,Filiz Tel Sehriye,3.95,number,8
+134,1134,Filiz Arpa Sehriye,3.95,number,8
+135,1135,Fomilk Badem Sekersiz,26.9,number,8
+136,1136,Fomilk Findik,26.9,number,8
+137,1137,Fomilk Badem Sekersiz,26.9,number,8
+138,1138,Duracell Basic Ince Kalem,24.3,number,8
+139,1139,Fairy Limon,10,number,8
+140,1140,Flormar Klasik Beyaz Oje,9,number,8
+141,1141,Vaseline Lip Therapy Aloe,22.55,number,8
+142,1142,Garnier Nem Bombasi Goz Sisklinigine Karsi Kagit Goz Maskesi,18.25,number,8
+143,1143,Okey Klasik,38.4,number,8
+144,1144,Lipton Slim Plus Mate Maydanoz & Elma,9.95,number,8
+145,1145,Lipton Slim Plus Kiraz Sapli Bardak Poset Cay,9.45,number,8
+146,1146,Namet 7/24 Hindi Fume,3.75,number,8
+147,1147,Kemal Kukrer Nar Eksisi,27.2,number,8
+148,1148,Ananas,17.95,number,8
+149,1149,Eti Alaska Frigo Karamelli Cikolata,5.4,number,8
+150,1150,Uni Baby Sampuan,21.5,number,8
