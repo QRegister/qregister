@@ -78,11 +78,7 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
             disableDefaultTabController: true,
             onTap: (int i) {
               initIndex = i;
-              controller.pageController.animateToPage(
-                i,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOutQuart,
-              );
+              controller.pageController.jumpToPage(i);
             },
             backgroundColor: kPrimaryColor5,
             color: kPrimaryColor4.withOpacity(0.6),

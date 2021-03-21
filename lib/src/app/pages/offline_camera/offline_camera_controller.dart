@@ -52,65 +52,118 @@ class OfflineCameraController extends Controller {
         barrierDismissible: false,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: Colors.white,
-            title: Text(
-              'Is this your receipt?',
-              style: GoogleFonts.openSans(
-                textStyle: TextStyle(
-                  color: kPrimaryColor4,
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                bottomRight: Radius.circular(
+                  15,
                 ),
               ),
+              side: BorderSide(
+                  color: kPrimaryColor2, width: 2, style: BorderStyle.solid),
             ),
-            content: Text(
-              'Store: ' +
-                  response.storeLocation +
-                  '\nTotal Cost: ' +
-                  response.totalPrice.toStringAsFixed(2),
-              style: GoogleFonts.openSans(
-                textStyle: TextStyle(
-                  fontSize: 21,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(getContext()).pop();
-                  scanResult = null;
-                },
-                child: Text(
-                  'Nope',
-                  style: GoogleFonts.openSans(
-                    textStyle: TextStyle(
-                      color: kPrimaryColor4.withOpacity(0.5),
-                      fontSize: 21,
+            backgroundColor: kPrimaryColor5,
+            content: Container(
+              height: 250,
+              width: MediaQuery.of(getContext()).size.width * 0.65,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    'assets/icons/receipt_check_icon.png',
+                    height: 50,
+                  ),
+                  Text(
+                    'Is this your receipt?',
+                    style: GoogleFonts.openSans(
+                      fontWeight: FontWeight.bold,
+                      fontSize: MediaQuery.of(getContext()).size.width * 0.045,
+                    ),
+                  ),
+                  Text(
+                    response.storeLocation,
+                    style: GoogleFonts.openSans(
+                      fontSize: MediaQuery.of(getContext()).size.width * 0.043,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    response.totalPrice.toStringAsFixed(2),
+                    style: GoogleFonts.openSans(
+                      fontSize: MediaQuery.of(getContext()).size.width * 0.043,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  foundReceipt = response;
-                  _presenter.addReceiptIdToStorage(response.id);
-                  Navigator.of(getContext()).pop();
-                },
-                child: Text(
-                  'Yes!',
-                  style: GoogleFonts.openSans(
-                    textStyle: TextStyle(
-                      color: kPrimaryColor1,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 21,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(getContext()).pop();
+                            scanResult = null;
+                          },
+                          child: Container(
+                            width:
+                                MediaQuery.of(getContext()).size.width * 0.25,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [kPrimaryColor1, kPrimaryColor3],
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'No',
+                                style: GoogleFonts.openSans(
+                                  color: kPrimaryColor5,
+                                  fontSize:
+                                      MediaQuery.of(getContext()).size.width *
+                                          0.043,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: TextButton(
+                          onPressed: () {
+                            foundReceipt = response;
+                            _presenter.addReceiptIdToStorage(response.id);
+                            Navigator.of(getContext()).pop();
+                          },
+                          child: Container(
+                            width:
+                                MediaQuery.of(getContext()).size.width * 0.25,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [kPrimaryColor3, kPrimaryColor1],
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Yes',
+                                style: GoogleFonts.openSans(
+                                  color: kPrimaryColor5,
+                                  fontSize:
+                                      MediaQuery.of(getContext()).size.width *
+                                          0.043,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           );
         },
       );
