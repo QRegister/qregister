@@ -169,30 +169,47 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                           alignment: Alignment.center,
                           child: kJumpingDotsProgressIndicator(kPrimaryColor1),
                         )
-                      : controller.receiptsOfUser != null &&
-                              controller.receiptsOfUser.length != 0
+                      : controller.receiptsToDisplay != null &&
+                              controller.receiptsToDisplay.length != 0
                           ? Container(
                               width: size.width,
                               height: size.height * 0.69,
-                              child: ListView.separated(
-                                itemCount: controller.receiptsOfUser.length + 2,
+                              child: ListView.builder(
+                                itemCount:
+                                    controller.receiptsToDisplay.length + 2,
                                 itemBuilder: (context, index) {
                                   if (index == 0 ||
                                       index ==
-                                          controller.receiptsOfUser.length + 1)
+                                          controller.receiptsToDisplay.length +
+                                              1)
                                     return SizedBox(
-                                      height: 60,
+                                      height: 45,
+                                    );
+                                  else if (controller.receiptsToDisplay
+                                      .elementAt(index - 1) is String)
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        left: size.width * 0.09,
+                                        bottom: 8,
+                                        top: 8,
+                                      ),
+                                      child: Text(
+                                        controller.receiptsToDisplay
+                                            .elementAt(index - 1),
+                                        style: GoogleFonts.openSans(
+                                          color:
+                                              kPrimaryColor4.withOpacity(0.4),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
                                     );
                                   else
                                     return receiptCard(
                                       context,
-                                      controller.receiptsOfUser
+                                      controller.receiptsToDisplay
                                           .elementAt(index - 1),
                                       controller.archiveReceiptOfUser,
                                     );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return Container(); // Today, Tomorrow
                                 },
                               ),
                             )
@@ -237,13 +254,10 @@ Widget receiptCard(
 ) {
   Size size = MediaQuery.of(context).size;
   String imagePath;
-  bool isStoreExist;
   if (existStores.contains(receipt.storeSlug)) {
     imagePath = 'assets/store_logos/${receipt.storeSlug}.png';
-    isStoreExist = true;
   } else {
     imagePath = 'assets/store_logos/default_store.png';
-    isStoreExist = false;
   }
 
   return TextButton(
@@ -282,6 +296,7 @@ Widget receiptCard(
             confirmDismiss: (direction) async {
               if (direction == DismissDirection.endToStart) {
                 await archiveReceiptOfUser(receipt.id);
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Receipt has been archived\n")));
                 return true;
@@ -304,7 +319,7 @@ Widget receiptCard(
                     child: Image.asset(
                       imagePath,
                       width: size.width * 0.15,
-                      height: isStoreExist ? 60 : 150,
+                      height: 50,
                     ),
                   ),
                   Container(
@@ -320,18 +335,22 @@ Widget receiptCard(
                               maxWidth: size.width * 0.4,
                               minHeight: size.height * 0.08,
                             ),
-                            child: Center(
-                              child: Text(
-                                '${receipt.storeLocation}',
-                                style: GoogleFonts.openSans(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: size.width * 0.041,
-                                  color: kPrimaryColor4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${receipt.storeLocation}',
+                                  style: GoogleFonts.openSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: size.width * 0.035,
+                                    color: kPrimaryColor4.withOpacity(0.6),
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.start,
                                 ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.start,
-                              ),
+                              ],
                             ),
                           ),
                         ),
@@ -339,6 +358,7 @@ Widget receiptCard(
                           '${receipt.totalPrice.toString()}',
                           style: GoogleFonts.openSans(
                             color: kPrimaryColor4,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -350,7 +370,7 @@ Widget receiptCard(
           ),
         ),
         SizedBox(
-          height: size.height * 0.05,
+          height: size.height * 0.01,
         ),
       ],
     ),
@@ -377,4 +397,5 @@ const List<String> existStores = [
   'a101',
   'sok',
   'bim',
+  'metro'
 ];

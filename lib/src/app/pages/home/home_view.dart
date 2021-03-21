@@ -28,9 +28,6 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
 
   @override
   void initState() {
-    super.initState();
-
-    // simply use this
     if (widget.isUploaded) {
       Timer.run(
         () {
@@ -63,6 +60,7 @@ class _HomeViewState extends ViewState<HomeView, HomeController>
         },
       );
     }
+    super.initState();
   }
 
   @override

@@ -66,6 +66,7 @@ class DataReceiptRepository implements ReceiptRepository {
 
   @override
   List<Receipt> getArchivedReceiptsOfUser() {
+    _archivedReceipts.sort((b, a) => a.date.compareTo(b.date));
     return this._archivedReceipts;
   }
 
@@ -124,11 +125,17 @@ class DataReceiptRepository implements ReceiptRepository {
   @override
   void initializeRepository(List<dynamic> receiptsOfUser,
       List<dynamic> archivedReceiptsOfUser) async {
+    // Necessary for signOut event
+    this._receipts = [];
+    this._archivedReceipts = [];
+    // Ends here
     if (receiptsOfUser != null && receiptsOfUser.isNotEmpty) {
       receiptsOfUser.forEach((element) {
         this._receipts.add(ReceiptMapper.createReceiptFromMap(element));
       });
     }
+    _receipts.sort((b, a) => a.date.compareTo(b.date));
+
     if (archivedReceiptsOfUser != null && archivedReceiptsOfUser.isNotEmpty) {
       archivedReceiptsOfUser.forEach((element) {
         this._archivedReceipts.add(ReceiptMapper.createReceiptFromMap(element));
