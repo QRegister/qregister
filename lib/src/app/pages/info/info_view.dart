@@ -6,7 +6,11 @@ class InfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double heightDiff = (size.height - 750) > 0 ? size.height - 750 : 0;
+    double heightDiff = size.height > 820
+        ? -14
+        : size.height > 750
+            ? size.height - 752
+            : 0;
     return Scaffold(
       body: Column(
         children: [
@@ -62,7 +66,7 @@ class InfoView extends StatelessWidget {
           ),
           Container(
             width: size.width * 0.8,
-            height: size.height * 0.63,
+            height: size.height * 0.62 - heightDiff,
             child: NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (overscroll) {
                 overscroll.disallowGlow();
