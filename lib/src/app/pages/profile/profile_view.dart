@@ -141,7 +141,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
             ),
           ),
           Container(
-            height: size.height * 0.69 - heightDiff,
+            height: size.height * 0.705,
             child: ControlledWidgetBuilder<ProfileController>(
               builder: (context, controller) => Stack(
                 children: [
@@ -175,7 +175,7 @@ class _ProfileViewState extends ViewState<ProfileView, ProfileController>
                               controller.receiptsToDisplay.length != 0
                           ? Container(
                               width: size.width,
-                              height: size.height * 0.69,
+                              height: size.height * 0.705,
                               child: ListView.builder(
                                 itemCount:
                                     controller.receiptsToDisplay.length + 2,

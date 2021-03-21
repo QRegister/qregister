@@ -72,6 +72,7 @@ class DataReceiptRepository implements ReceiptRepository {
 
   @override
   List<Receipt> getReceiptsOfUser() {
+    _receipts.sort((b, a) => a.date.compareTo(b.date));
     return this._receipts;
   }
 

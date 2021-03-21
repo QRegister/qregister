@@ -34,20 +34,6 @@ class _ArchiveViewState extends ViewState<ArchiveView, ArchiveController> {
             child: Stack(
               children: [
                 Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(25),
-                    child: IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: kPrimaryColor4,
-                        size: size.width * 0.08,
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
                   alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -57,6 +43,20 @@ class _ArchiveViewState extends ViewState<ArchiveView, ArchiveController> {
                         color: kPrimaryColor4,
                         fontSize: size.width * 0.06,
                         fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: kPrimaryColor4,
+                        size: size.width * 0.08,
                       ),
                     ),
                   ),

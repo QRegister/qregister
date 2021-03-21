@@ -62,7 +62,7 @@ class InfoView extends StatelessWidget {
           ),
           Container(
             width: size.width * 0.8,
-            height: size.height * 0.62 - heightDiff,
+            height: size.height * 0.63,
             child: NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (overscroll) {
                 overscroll.disallowGlow();
